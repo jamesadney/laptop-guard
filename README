@@ -9,7 +9,7 @@ The alarm can be triggered by:
 When triggered, laptop alarm:
 (1) Plays an alarm sound while it
     (a) Takes a picture with a webcam
-    (b) Sends a pixture message to a phone number
+    (b) Sends a picture message to a phone number of your choosing
     
 WARNING: This code is not highly tested and subject to radical change.  
 There are definitely bugs.  That being said, it pretty much does the job for me
@@ -35,7 +35,7 @@ Usage:
 cd /<enter_your_directory>/laptop-alarm/
 python alarm-service.py & python alarm-gtk.py
 
-(2) Press "Set Alarm" to lock computer and activate alarm
+(2) Press "Set Alarm" button to lock computer and activate alarm
 (3) Enter password (default=preyrocks) and press ENTER to unlock screen
     (a) Alarm is STILL ACTIVE!
 (4) Press "Unset Alarm" button to deactivate alarm
