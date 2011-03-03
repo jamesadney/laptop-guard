@@ -1,0 +1,22 @@
+- send simple text message first thing, then send picture message later?
+
+- if trigger is lid closing, wait until lid opens to take pictures
+
+- should i inhibit screensaver too?
+    - if it locks screen in background
+    
+- mute other programs before unmuting speakers
+    - if is video/music playing but you don't know it would be very annoying
+      for it to turn on full blast when you set alarm
+  
+- add option to run without checking battery power
+
+- upload to github
+    - remove my passwd from file (make email stuff use gnome-keyring)
+    - after upload, start new branch to remove dbus service
+    - start another branch? to use opencv for webcam and ? for playing audio
+    
+- rewrite gtk-lock screen
+    - send any bugs to prey-modules upstream
+    
+- make file paths universal
