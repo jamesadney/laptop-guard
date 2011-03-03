@@ -1,0 +1,44 @@
+laptop-alarm locks your screen and then waits to be triggered.
+
+The alarm can be triggered by:
+(1) Unplugging the computer from ac power
+(2) Pressing the power button (at least on my computer)
+(3) Pressing ctrl + alt keys at the same time
+(4) Shutting the lid of the computer
+
+When triggered, laptop alarm:
+(1) Plays an alarm sound while it
+    (a) Takes a picture with a webcam
+    (b) Sends a pixture message to a phone number
+    
+WARNING: This code is not highly tested and subject to radical change.  
+There are definitely bugs.  That being said, it pretty much does the job for me
+right now. (I have an Ubuntu 10.10 amd64 system)
+
+
+Current Dependencies (will probably change):
+- python 2.6
+- python-dbus
+- python-gtk2
+- pulseaudio-utils
+- mpg123
+- streamer
+
+Installation Instructions:
+(1) Extract the tar file
+(2) Open settings.py and add in your email, phone number, and directory locations
+    where indicated.
+    
+Usage:
+(1) Open up a terminal and run these commands:
+
+cd /<enter_your_directory>/laptop-alarm/
+python alarm-service.py & python alarm-gtk.py
+
+(2) Press "Set Alarm" to lock computer and activate alarm
+(3) Enter password (default=preyrocks) and press ENTER to unlock screen
+    (a) Alarm is STILL ACTIVE!
+(4) Press "Unset Alarm" button to deactivate alarm
+(5) Close the window to exit
+
+----> when you exit the window both processes will be terminated
