@@ -24,50 +24,35 @@ import os, sys
 
 import alarm, settings
 
-class Application:
+class App:
     def __init__(self, ignore_battery=False):
         
         self.ignore_battery = ignore_battery
-        self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
-        self.window.set_border_width(10)
-        self.window.set_title("Laptop Alarm")
-    
-        self.window.connect("delete_event", self.delete_event)
-        self.window.connect("destroy", self.destroy)
-    
-        self.set_alarm_button = gtk.Button("Set Alarm")
-        self.set_alarm_button.connect("clicked", self.set_alarm)
-        self.unset_alarm_button = gtk.Button("Unset Alarm")
-        self.unset_alarm_button.connect("clicked", self.unset_alarm)
-    
-        self.window.add(self.set_alarm_button)
-        self.window.set_position(gtk.WIN_POS_CENTER_ALWAYS)
-        self.window.set_default_size(200, -1)
-        
-        #get icon from theme
-#        icon_theme = gtk.icon_theme_get_default()
-#        try:
-#            pixbuf = icon_theme.load_icon("changes-prevent", 48, 0)
-#        except gobject.GError, exc:
-#            print "can't load icon", exc     
-#        self.window.set_icon(pixbuf)
-        
-        icon_path = os.path.join(os.getcwd(), "system-lock-screen.svg")
-        self.window.set_icon_from_file(icon_path)
-        
-        self.window.show_all()
-        
         self.alarm = alarm.Alarm()
         
         self.session_bus = dbus.SessionBus()
         self.dbus_object  = self.session_bus.get_object("org.theftalarm.Alarm","/")
-
-    def set_alarm(self, widget):
+        
+        self.builder = gtk.Builder()
+        self.builder.add_from_file("alarm.glade")
+        self.builder.connect_signals(self)
+        self.main_window = self.builder.get_object("main_window")
+        
+        self.set_button = self.builder.get_object("set_btn")
+        self.unset_button = self.builder.get_object("unset_btn")
+        
+        self.main_window.show_all()
+        
+    def on_main_window_destroy(self, widget, *args):
+        print "Destroy signal occurred"
+        gtk.main_quit()
+    
+    def on_set_btn_clicked(self, widget):
         
         if (not self.ignore_battery and 
             self.dbus_object.IsOnBattery(dbus_interface="org.theftalarm.Alarm.Service")):
             print "error: can't set alarm when unplugged"
-            dialog = gtk.MessageDialog(parent=self.window,
+            dialog = gtk.MessageDialog(parent=self.main_window,
                                        flags=gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT, 
                                        type=gtk.MESSAGE_ERROR,
                                        buttons=gtk.BUTTONS_CLOSE,
@@ -77,9 +62,8 @@ class Application:
             dialog.show()
 
         else:
-            self.window.remove(self.set_alarm_button)
-            self.window.add(self.unset_alarm_button)
-            self.window.show_all()
+            widget.set_sensitive(False)
+            self.unset_button.set_sensitive(True)
             
             self.alarm.initialize()
             
@@ -87,24 +71,28 @@ class Application:
         print "Dialog: {0}, ID: {1}".format(dialog, response_id )
         dialog.destroy()
         
-    def unset_alarm(self, widget):
-        self.window.remove(self.unset_alarm_button)
-        self.window.add(self.set_alarm_button)
+    def on_unset_btn_clicked(self, widget):
+        widget.set_sensitive(False)
+        self.set_button.set_sensitive(True)
         
         self.alarm.unset()
-
-    def delete_event(self, widget, event, data=None):
-        print "delete event occurred"
-
-        return False
-
-    def destroy(self, widget, data=None):
-        print "destroy signal occurred"
+    
+    def on_prefs_btn_clicked(self, widget):
+        pass
+    
+    def on_about_btn_clicked(self, widget):
+        about_dialog = self.builder.get_object("about_dialog")
+        about_dialog.show_all()
+    
+    def on_close_btn_clicked(self, widget):
         gtk.main_quit()
-#        sys.exit()
-
-    def main(self):
-        gtk.main()
+    
+    def on_about_dialog_close(self, widget):
+        print "About button close"
+    
+    def on_about_dialog_response(self, dialog, response_id):
+        print "About Button Response"
+        dialog.hide()
 
 if __name__ == "__main__":
     battery_arg = False
@@ -119,7 +107,7 @@ if __name__ == "__main__":
             print "alarm-gtk.py --ignore-battery"
             sys.exit()
     
-    app = Application(ignore_battery=battery_arg)
-    app.main()
+    app = App(battery_arg)
+    gtk.main()
     
     
