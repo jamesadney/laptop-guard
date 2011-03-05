@@ -34,7 +34,7 @@ class App:
         self.dbus_object  = self.session_bus.get_object("org.theftalarm.Alarm","/")
         
         self.builder = gtk.Builder()
-        self.builder.add_from_file("alarm.glade")
+        self.builder.add_from_file("ui/alarm.glade")
         self.builder.connect_signals(self)
         self.main_window = self.builder.get_object("main_window")
         
