@@ -23,10 +23,12 @@ import dbus
 import os, sys
 
 import alarm, settings
+#from modules._settings import Settings
 
 class App:
     def __init__(self, ignore_battery=False):
         
+#        self.settings = Settings.get_instance()
         self.ignore_battery = ignore_battery
         self.alarm = alarm.Alarm()
         
@@ -41,11 +43,12 @@ class App:
         self.set_button = self.builder.get_object("set_btn")
         self.unset_button = self.builder.get_object("unset_btn")
         
+        self.prefs_window = self.builder.get_object("prefs_window")
+        self.about_dialog = self.builder.get_object("about_dialog")
+        
         self.main_window.show_all()
         
-    def on_main_window_destroy(self, widget, *args):
-        print "Destroy signal occurred"
-        gtk.main_quit()
+    # MAIN WINDOW CALLBACKS #
     
     def on_set_btn_clicked(self, widget):
         
@@ -66,10 +69,6 @@ class App:
             self.unset_button.set_sensitive(True)
             
             self.alarm.initialize()
-            
-    def close_dialog(self, dialog, response_id):
-        print "Dialog: {0}, ID: {1}".format(dialog, response_id )
-        dialog.destroy()
         
     def on_unset_btn_clicked(self, widget):
         widget.set_sensitive(False)
@@ -78,17 +77,53 @@ class App:
         self.alarm.unset()
     
     def on_prefs_btn_clicked(self, widget):
-        pass
-    
-    def on_about_btn_clicked(self, widget):
-        about_dialog = self.builder.get_object("about_dialog")
-        about_dialog.show_all()
-    
+        print "Preferences Button pushed"
+        self.prefs_window.show_all()
+        
+    #TODO: Redo this with glade for consistency    
+    def close_dialog(self, dialog, response_id):
+        print "Destroying battery message dialog"
+        dialog.destroy()
+        
     def on_close_btn_clicked(self, widget):
         gtk.main_quit()
+        
+    def on_main_window_destroy(self, widget, *args):
+        print "Destroy signal occurred"
+        gtk.main_quit()
+        
+    def on_volume_adjustment_value_changed(self, adjustment):
+        
+        self.alarm_volume = int(adjustment.get_value())
+        print "value changed: {0}".format(self.alarm_volume)
+        
+    def on_prefs_close_btn_clicked(self, widget):
+        self._close_prefs_window()
+        
+    def on_prefs_window_delete_event(self, widget, *args):
+        print "delete event"
+        self._close_prefs_window()
+        
+        # prevent window from being destroyed
+        return True
     
-    def on_about_dialog_close(self, widget):
-        print "About button close"
+    def _close_prefs_window(self):
+        
+#        self.settings.general['alarm_volume'] = self.alarm_volume
+#        self.settings.write()
+        self.prefs_window.hide()
+    
+    def on_hscale1_format_value(self, scale, value):
+        formatted_value = "{0:.0f}%".format(value)
+        return formatted_value
+    
+    def on_about_btn_clicked(self, widget):
+        self.about_dialog.show_all()
+    
+    def on_about_dialog_delete_event(self, dialog, *args):
+        print "About button delete event"
+        dialog.hide()
+        return True
     
     def on_about_dialog_response(self, dialog, response_id):
         print "About Button Response"
