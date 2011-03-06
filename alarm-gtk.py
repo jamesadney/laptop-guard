@@ -117,6 +117,12 @@ class App:
         
         self.prefs_window.show_all()
         
+        # Unset alarm so changes to preferences will apply
+        if self.alarm.is_set:
+            self.alarm.unset()
+            self.set_button.set_sensitive(True)
+            self.unset_button.set_sensitive(False)
+            
     def on_about_btn_clicked(self, widget):
         self.about_dialog.show_all()
         
