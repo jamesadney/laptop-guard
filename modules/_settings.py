@@ -19,7 +19,14 @@ class Settings:
     instance = None
 
     # the different settings in each config block
-    general = {}
+    general = {
+               "alarm_volume" : 100,
+               "pictures_directory" : os.path.expanduser("~/Pictures"),
+               "to_address" : "",
+               "from_address" : "",
+               "username" : "",
+               "password" : ""
+               }
     
     def __init__(self, filename = None):
         """
@@ -41,7 +48,6 @@ class Settings:
     def get_instance(cls):
         """ This class is a singlton so use this method to get it """
         
-        print "getting instance"
         if cls.instance:
             return cls.instance
 

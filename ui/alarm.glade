@@ -250,10 +250,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="entry1">
+                      <object class="GtkEntry" id="pictures_directory_entry">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
+                        <signal name="activate" handler="on_pictures_directory_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -297,10 +298,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                     <property name="column_spacing">12</property>
                     <property name="row_spacing">6</property>
                     <child>
-                      <object class="GtkEntry" id="entry2">
+                      <object class="GtkEntry" id="to_address_entry">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
+                        <signal name="activate" handler="on_to_address_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -331,10 +333,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="entry3">
+                      <object class="GtkEntry" id="from_address_entry">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
+                        <signal name="activate" handler="on_from_address_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -400,12 +403,13 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkCheckButton" id="show_password">
+                      <object class="GtkCheckButton" id="show_password_box">
                         <property name="label" translatable="yes">Show Password</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="draw_indicator">True</property>
+                        <signal name="toggled" handler="on_show_password_box_toggled"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -415,10 +419,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="entry4">
+                      <object class="GtkEntry" id="username_entry">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
+                        <signal name="activate" handler="on_username_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -426,11 +431,12 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="entry5">
+                      <object class="GtkEntry" id="password_entry">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="visibility">False</property>
                         <property name="invisible_char">•</property>
+                        <signal name="activate" handler="on_password_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>

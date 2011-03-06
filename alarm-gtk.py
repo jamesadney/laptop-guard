@@ -22,7 +22,7 @@ import dbus
 
 import os, sys
 
-import alarm, settings
+import alarm
 from modules._settings import Settings
 
 class App:
@@ -31,28 +31,52 @@ class App:
         self.ignore_battery = ignore_battery
         self.alarm = alarm.Alarm()
         
+        ## Set up dbus ##
         self.session_bus = dbus.SessionBus()
         self.dbus_object  = self.session_bus.get_object("org.theftalarm.Alarm","/")
         
+        ## Load glade file(s) and initialize ##
         self.builder = gtk.Builder()
         self.builder.add_from_file("ui/alarm.glade")
         self.builder.connect_signals(self)
-        self.main_window = self.builder.get_object("main_window")
-        #TODO: use self.builder.get_objects in __init__?
-        self.volume_adjustment = self.builder.get_object("volume_adjustment")
-        
-        self.set_button = self.builder.get_object("set_btn")
-        self.unset_button = self.builder.get_object("unset_btn")
-        
-        self.prefs_window = self.builder.get_object("prefs_window")
-        self.about_dialog = self.builder.get_object("about_dialog")
-        
-        new_settings = Settings.get_instance()
-        self.alarm_volume = int(new_settings.general["alarm_volume"])
+        self._get_builder_objects()
+
+        self._load_settings()
         
         self.main_window.show_all()
         
-    # MAIN WINDOW CALLBACKS #
+    def _get_builder_objects(self):
+        
+        ## Main Window ##
+        self.main_window = self.builder.get_object("main_window")
+        self.set_button = self.builder.get_object("set_btn")
+        self.unset_button = self.builder.get_object("unset_btn")
+        
+        ## Preferences Window ##
+        self.prefs_window = self.builder.get_object("prefs_window")
+        self.volume_adjustment = self.builder.get_object("volume_adjustment")
+        self.pictures_directory_entry = self.builder.get_object("pictures_directory_entry")
+        self.to_address_entry = self.builder.get_object("to_address_entry")
+        self.from_address_entry = self.builder.get_object("from_address_entry")
+        self.username_entry = self.builder.get_object("username_entry")
+        self.password_entry = self.builder.get_object("password_entry")
+        self.show_password_box = self.builder.get_object("show_password_box")
+        
+        ## About Dialog ##
+        self.about_dialog = self.builder.get_object("about_dialog")
+        
+    def _load_settings(self):
+        
+        new_settings = Settings.get_instance()
+        
+        self.alarm_volume = int(new_settings.general["alarm_volume"])
+        self.pictures_directory = new_settings.general["pictures_directory"]
+        self.to_address = new_settings.general["to_address"]
+        self.from_address = new_settings.general["from_address"]
+        self.username = new_settings.general["username"]
+        self.password = new_settings.general["password"]
+        
+    ## Main window callbacks ##
     
     def on_set_btn_clicked(self, widget):
         
@@ -83,8 +107,18 @@ class App:
     def on_prefs_btn_clicked(self, widget):
         print "Preferences Button pushed"
         
+        ## Restore settings ##
         self.volume_adjustment.set_value(self.alarm_volume)
+        self.pictures_directory_entry.set_text(self.pictures_directory)
+        self.to_address_entry.set_text(self.to_address)
+        self.from_address_entry.set_text(self.from_address)
+        self.username_entry.set_text(self.username)
+        self.password_entry.set_text(self.password)
+        
         self.prefs_window.show_all()
+        
+    def on_about_btn_clicked(self, widget):
+        self.about_dialog.show_all()
         
     #TODO: Redo this with glade for consistency    
     def close_dialog(self, dialog, response_id):
@@ -98,10 +132,41 @@ class App:
         print "Destroy signal occurred"
         gtk.main_quit()
         
+    ## Preferences window callbacks ##
+        
     def on_volume_adjustment_value_changed(self, adjustment):
         
         self.alarm_volume = int(adjustment.get_value())
         print "value changed: {0}".format(self.alarm_volume)
+        
+    def on_pictures_directory_entry_activate(self, entry):
+        
+        self.pictures_directory = entry.get_text()
+        print "Recorded new pictures directory"
+        
+    def on_to_address_entry_activate(self, entry):
+        
+        self.to_address = entry.get_text()
+        print "Recorded new to_address"
+        
+    def on_from_address_entry_activate(self, entry):
+        
+        self.from_address = entry.get_text()
+        print "Recorded new from_address"
+        
+    def on_username_entry_activate(self, entry):
+        
+        self.username = entry.get_text()
+        print "Recorded new username"
+        
+    def on_password_entry_activate(self, entry):
+        
+        self.password = entry.get_text()
+        print "Recorded new password"
+        
+    def on_show_password_box_toggled(self, button):
+        
+        self.show_password = button.get_active()
         
     def on_prefs_close_btn_clicked(self, widget):
         self._close_prefs_window()
@@ -116,7 +181,16 @@ class App:
     def _close_prefs_window(self):
         
         new_settings = Settings.get_instance()
+        
+        #TODO: only update if changed
+        ## Save settings ##
         new_settings.general['alarm_volume'] = self.alarm_volume
+        new_settings.general['pictures_directory'] = self.pictures_directory
+        new_settings.general['to_address'] = self.to_address
+        new_settings.general['from_address'] = self.from_address
+        new_settings.general['username'] = self.username
+        new_settings.general['password'] = self.password
+        
         new_settings.write()
         self.prefs_window.hide()
     
@@ -124,8 +198,7 @@ class App:
         formatted_value = "{0:.0f}%".format(value)
         return formatted_value
     
-    def on_about_btn_clicked(self, widget):
-        self.about_dialog.show_all()
+    ## About dialog callbacks ##
     
     def on_about_dialog_delete_event(self, dialog, *args):
         print "About button delete event"
@@ -151,5 +224,3 @@ if __name__ == "__main__":
     
     app = App(battery_arg)
     gtk.main()
-    
-    

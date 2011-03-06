@@ -77,8 +77,10 @@ class Alarm:
         Start loop to wait for signal to activate alarm
         """ 
         if not self.is_set:
-            new_settings = Settings.get_instance()
-            alarm_volume = int(new_settings.general["alarm_volume"])
+            
+            #Get settings
+            self.settings = Settings.get_instance()
+            alarm_volume = int(self.settings.general["alarm_volume"])
             
             # make sure service sends a signal even if it previously sent some
             self.dbus_object.Reset(dbus_interface='org.theftalarm.Alarm.Service')
@@ -112,7 +114,9 @@ class Alarm:
         Start alarm sound and actions
         """
         if self.is_set:
-            pics_process_pid = self.camera.take_pictures(dest_directory=settings.PICTURES_PATH,
+            pictures_directory = self.settings.general["pictures_directory"]
+            
+            pics_process_pid = self.camera.take_pictures(dest_directory=pictures_directory,
                                       file_extension=settings.PICTURES_FILE_EXTENSION)
             self.alarm_sound.play()
             os.waitpid(pics_process_pid, 0)

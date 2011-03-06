@@ -15,3 +15,10 @@
     - send any bugs to prey-modules upstream
     
 - make file paths universal
+
+- clean up code!
+
+GUI
+
+- add "Apply" button to preferences window or automatically apply when pushing
+closed button
