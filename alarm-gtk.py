@@ -139,6 +139,7 @@ class App:
         self.alarm_volume = int(adjustment.get_value())
         print "value changed: {0}".format(self.alarm_volume)
         
+    #TODO: create pics directory if it doesn't already exist
     def on_pictures_directory_entry_activate(self, entry):
         
         self.pictures_directory = entry.get_text()
