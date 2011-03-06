@@ -23,12 +23,11 @@ import dbus
 import os, sys
 
 import alarm, settings
-#from modules._settings import Settings
+from modules._settings import Settings
 
 class App:
     def __init__(self, ignore_battery=False):
         
-#        self.settings = Settings.get_instance()
         self.ignore_battery = ignore_battery
         self.alarm = alarm.Alarm()
         
@@ -39,12 +38,17 @@ class App:
         self.builder.add_from_file("ui/alarm.glade")
         self.builder.connect_signals(self)
         self.main_window = self.builder.get_object("main_window")
+        #TODO: use self.builder.get_objects in __init__?
+        self.volume_adjustment = self.builder.get_object("volume_adjustment")
         
         self.set_button = self.builder.get_object("set_btn")
         self.unset_button = self.builder.get_object("unset_btn")
         
         self.prefs_window = self.builder.get_object("prefs_window")
         self.about_dialog = self.builder.get_object("about_dialog")
+        
+        new_settings = Settings.get_instance()
+        self.alarm_volume = int(new_settings.general["alarm_volume"])
         
         self.main_window.show_all()
         
@@ -78,6 +82,8 @@ class App:
     
     def on_prefs_btn_clicked(self, widget):
         print "Preferences Button pushed"
+        
+        self.volume_adjustment.set_value(self.alarm_volume)
         self.prefs_window.show_all()
         
     #TODO: Redo this with glade for consistency    
@@ -109,8 +115,9 @@ class App:
     
     def _close_prefs_window(self):
         
-#        self.settings.general['alarm_volume'] = self.alarm_volume
-#        self.settings.write()
+        new_settings = Settings.get_instance()
+        new_settings.general['alarm_volume'] = self.alarm_volume
+        new_settings.write()
         self.prefs_window.hide()
     
     def on_hscale1_format_value(self, scale, value):

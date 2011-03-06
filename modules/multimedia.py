@@ -17,7 +17,6 @@ import subprocess
 import os
 import audio
 
-#TODO: get rid of relative imports
 import settings
 
 

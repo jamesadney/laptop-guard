@@ -24,6 +24,8 @@ from base64 import b64decode
 import settings
 from modules import multimedia, mailer, preylock
 
+from modules._settings import Settings
+
 class Alarm:
     """
     Receives signal to trigger alarm and activates alarm
@@ -75,6 +77,9 @@ class Alarm:
         Start loop to wait for signal to activate alarm
         """ 
         if not self.is_set:
+            new_settings = Settings.get_instance()
+            alarm_volume = int(new_settings.general["alarm_volume"])
+            
             # make sure service sends a signal even if it previously sent some
             self.dbus_object.Reset(dbus_interface='org.theftalarm.Alarm.Service')
             
@@ -83,7 +88,8 @@ class Alarm:
                                                         "Computer locked to let alarm trigger",
                                                         4|8)
             
-            self.alarm_sound = multimedia.Sound(settings.AUDIO_FILE, settings.VOLUME_PERCENT)
+            self.alarm_sound = multimedia.Sound(settings.AUDIO_FILE, 
+                                                alarm_volume)
             self.camera = multimedia.Webcam()
             self.is_set = True
             self.prey_lock()
