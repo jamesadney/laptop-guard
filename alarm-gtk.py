@@ -183,6 +183,14 @@ class App:
         
         new_settings = Settings.get_instance()
         
+        ## read values ##
+        self.alarm_volume = int(self.volume_adjustment.get_value())
+        self.pictures_directory = self.pictures_directory_entry.get_text()
+        self.to_address = self.to_address_entry.get_text()
+        self.from_address = self.from_address_entry.get_text()
+        self.username = self.username_entry.get_text()
+        self.password = self.password_entry.get_text()
+        
         #TODO: only update if changed
         ## Save settings ##
         new_settings.general['alarm_volume'] = self.alarm_volume

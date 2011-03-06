@@ -20,5 +20,13 @@
 
 GUI
 
-- add "Apply" button to preferences window or automatically apply when pushing
-closed button
+- disable callbacks for entry-activate signals in favor of saving every time close
+    is hit
+    
+- make "Show Password" work
+
+- gnome-keyring
+
+- add email server settings so gmail is required
+
+- add alarm lock screen password to preferences window - figure out user authentication
