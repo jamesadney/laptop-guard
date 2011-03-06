@@ -138,15 +138,15 @@ class Alarm:
         Use mailer package to send text message
         """
         message = mailer.Message()
-        message.From = settings.FROM_EMAIL_ADDRESS
-        message.To = settings.TO_EMAIL_ADDRESS
+        message.From = self.settings.general['from_address']
+        message.To = self.settings.general['to_address']
         message.Subject = "Alarm"
         message.Body = open(settings.TEXT_MESSAGE, "rb").read()
-        message.attach(os.path.join(settings.PICTURES_PATH ,
+        message.attach(os.path.join(self.settings.general['pictures_directory'] ,
                                     "alarmpic3.{0}".format(settings.PICTURES_FILE_EXTENSION)))
         
         sender = mailer.Mailer('smtp.gmail.com', port=587, use_tls=True)
-        sender.login(settings.USERNAME, b64decode(settings.PASSWORD))
+        sender.login(self.settings.general['username'], self.settings.general["password"])
         sender.send(message)
         
     def gnome_screensaver_lock(self):
