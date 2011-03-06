@@ -256,7 +256,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
-                        <signal name="activate" handler="on_pictures_directory_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -304,7 +303,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
-                        <signal name="activate" handler="on_to_address_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -339,7 +337,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
-                        <signal name="activate" handler="on_from_address_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -425,7 +422,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="invisible_char">•</property>
-                        <signal name="activate" handler="on_username_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -438,7 +434,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <property name="can_focus">True</property>
                         <property name="visibility">False</property>
                         <property name="invisible_char">•</property>
-                        <signal name="activate" handler="on_password_entry_activate"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -500,6 +495,5 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
     <property name="page_size">10</property>
-    <signal name="value_changed" handler="on_volume_adjustment_value_changed"/>
   </object>
 </interface>

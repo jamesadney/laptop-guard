@@ -134,37 +134,6 @@ class App:
         
     ## Preferences window callbacks ##
         
-    def on_volume_adjustment_value_changed(self, adjustment):
-        
-        self.alarm_volume = int(adjustment.get_value())
-        print "value changed: {0}".format(self.alarm_volume)
-        
-    #TODO: create pics directory if it doesn't already exist
-    def on_pictures_directory_entry_activate(self, entry):
-        
-        self.pictures_directory = entry.get_text()
-        print "Recorded new pictures directory"
-        
-    def on_to_address_entry_activate(self, entry):
-        
-        self.to_address = entry.get_text()
-        print "Recorded new to_address"
-        
-    def on_from_address_entry_activate(self, entry):
-        
-        self.from_address = entry.get_text()
-        print "Recorded new from_address"
-        
-    def on_username_entry_activate(self, entry):
-        
-        self.username = entry.get_text()
-        print "Recorded new username"
-        
-    def on_password_entry_activate(self, entry):
-        
-        self.password = entry.get_text()
-        print "Recorded new password"
-        
     def on_show_password_box_toggled(self, button):
         
         self.show_password = button.get_active()
