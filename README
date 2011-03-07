@@ -11,10 +11,8 @@ When triggered, laptop alarm:
     (a) Takes a picture with a webcam
     (b) Sends a picture message to a phone number of your choosing
     
-WARNING: This code is not highly tested and subject to radical change.  
-There are definitely bugs.  That being said, it pretty much does the job for me
-right now. (I have an Ubuntu 10.10 amd64 system)
-
+WARNING: There are bugs in this code and it is somewhat Ubuntu/Debian and 
+Gnome dependent at the moment.
 
 Current Dependencies (will probably change):
 - python2.6
@@ -24,21 +22,30 @@ Current Dependencies (will probably change):
 - mpg123
 - streamer
 
-Installation Instructions:
-(1) Extract the tar file
-(2) Open settings.py and add in your email, phone number, and directory locations
-    where indicated.
+############## Installation Instructions (Ubuntu) #############
+(1) Install dependencies:
+
+sudo apt-get install mpg123 streamer python-dbus python-gtk2 pulseaudio-utils
+
+(2) Extract tar.gz file
+(3) Move into directory and run install script as root:
+cd laptop-alarm
+sudo ./install.sh
     
-Usage:
-(1) Open up a terminal and run these commands:
+############## Usage ##############
+(1) Run command:
 
-cd /<enter_your_directory>/laptop-alarm/
-python alarm-service.py & python alarm-gtk.py
+laptop-alarm
 
-(2) Press "Set Alarm" button to lock computer and activate alarm
-(3) Enter password (default=preyrocks) and press ENTER to unlock screen
-    (a) Alarm is STILL ACTIVE!
-(4) Press "Unset Alarm" button to deactivate alarm
-(5) Close the window to exit
+(2) Configure settings by clicking on button in bottom left corner of window.
 
-----> when you exit the window both processes will be terminated
+- The username and password refer to those of your outgoing mail account (for 
+sending text message alert)
+
+- ONLY GMAIL is supported right now because this is what I have and I wrote the
+program just for myself at first. This will be more generic in the future.
+This is not securely stored (simply encoded using base64).  Soon this will be
+saved in the gnome-keyring.
+
+- It is important to remember the "Lock Screen Password"!! The default is 
+"password"

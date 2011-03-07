@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/usr/share/laptop-alarm/alarm-service.py &
+/usr/share/laptop-alarm/alarm-gtk.py
