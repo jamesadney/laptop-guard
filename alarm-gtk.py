@@ -44,7 +44,14 @@ class App:
         
         ## Load glade file(s) and initialize ##
         self.builder = gtk.Builder()
-        self.builder.add_from_file("ui/alarm.glade")
+        
+        new_settings = Settings.get_instance()
+        if use_local_dirs:
+            ui_directory = os.path.join(working_directory, "ui")
+        else:
+            ui_directory = new_settings.general["ui_path"]
+        self.builder.add_from_file(os.path.join(ui_directory, "alarm.glade"))
+        
         self.builder.connect_signals(self)
         self._get_builder_objects()
 

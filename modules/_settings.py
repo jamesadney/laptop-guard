@@ -27,6 +27,7 @@ class Settings:
                "username" : "",
                "password" : "cGFzc3dvcmQ=", # "password"
                "media_path" : "/usr/share/laptop-alarm/media/",
+               "ui_path" : "/usr/share/laptop-alarm/ui",
                "audio_file" : "caralarm.mp3",
                "text_message" : "Laptop Alarm!!",
                "pictures_file_extension" : "jpeg",
