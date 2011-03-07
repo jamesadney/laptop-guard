@@ -17,18 +17,20 @@ import subprocess
 import os
 import audio
 
-import settings
-
-
 class Sound:
 
     def __init__(self, file_location, volume_percent=100):
     
         self.file_location = file_location
         self.playing = False
-        self.audio_data = audio.get_system_info()
-        self.was_muted = self.audio_data[1]
-        self.initial_volume = self.audio_data[2]
+        try:
+            self.audio_data = audio.get_system_info()
+            self.was_muted = self.audio_data[1]
+            self.initial_volume = self.audio_data[2]
+        except AttributeError:
+            print "Error retrieving volume information"
+            self.was_muted = True
+            self.initial_volume = 40
         
         # unmute and set volume at desired level
         self.__unmute()

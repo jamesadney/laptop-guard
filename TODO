@@ -5,6 +5,8 @@
 - should i inhibit screensaver too?
     - if it locks screen in background
     
+- use python-pulseaudio to get/set volumes?
+    - if not, make this much more robust
 - mute other programs before unmuting speakers
     - if is video/music playing but you don't know it would be very annoying
       for it to turn on full blast when you set alarm

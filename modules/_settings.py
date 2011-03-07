@@ -25,7 +25,12 @@ class Settings:
                "to_address" : "",
                "from_address" : "",
                "username" : "",
-               "password" : ""
+               "password" : "",
+               "media_path" : "/usr/share/laptop-alarm/media/",
+               "audio_file" : "caralarm.mp3",
+               "text_message" : "Laptop Alarm!!",
+               "pictures_file_extension" : "jpeg",
+               "lockscreen_password" : "preyrocks"
                }
     
     def __init__(self, filename = None):

@@ -26,10 +26,12 @@ import alarm
 from modules._settings import Settings
 
 class App:
-    def __init__(self, ignore_battery=False):
+    def __init__(self, ignore_battery=False, use_local_dirs=False):
         
         self.ignore_battery = ignore_battery
-        self.alarm = alarm.Alarm()
+        
+        working_directory = os.getcwd()
+        self.alarm = alarm.Alarm(working_directory)
         
         ## Set up dbus ##
         self.session_bus = dbus.SessionBus()
@@ -126,7 +128,7 @@ class App:
     def on_about_btn_clicked(self, widget):
         self.about_dialog.show_all()
         
-    #TODO: Redo this with glade for consistency    
+    #TODO: redo with glade    
     def close_dialog(self, dialog, response_id):
         print "Destroying battery message dialog"
         dialog.destroy()
@@ -194,17 +196,23 @@ class App:
         dialog.hide()
 
 if __name__ == "__main__":
-    battery_arg = False
-    if len(sys.argv) > 1:
-        if sys.argv[1] == "--ignore-battery":
-            battery_arg = True
-        elif False:
-            pass
-        else:
-            print "\nError please use following supported arguments:\n"
-            print "alarm-gtk.py"
-            print "alarm-gtk.py --ignore-battery"
-            sys.exit()
     
-    app = App(battery_arg)
+    import optparse
+
+    parser = optparse.OptionParser(usage="%prog [options] [project-file]")
+    
+    parser.add_option("-l", "--local-dirs", 
+                      action="store_true", 
+                      dest="use_local_dirs", 
+                      help="Use files from the local directory tree")
+    
+    parser.add_option("--ignore-battery",
+                      action="store_true",
+                      dest="ignore_battery",
+                      help="Allow user to set alarm when on battery power.\n\
+                      This will make alarm go off immediately upon it being set.")
+    
+    options, args = parser.parse_args()        
+    
+    app = App(options.ignore_battery, options.use_local_dirs)
     gtk.main()
