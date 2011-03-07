@@ -1,5 +1,5 @@
 #!/bin/bash
 
-gksudo apt-get install mpg123 streamer python-dbus python-gtk2 pulseaudio-utils
+gksudo apt-get -y install mpg123 streamer python-dbus python-gtk2 pulseaudio-utils
 
 sudo ./install.sh
