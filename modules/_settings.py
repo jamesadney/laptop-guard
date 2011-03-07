@@ -25,7 +25,7 @@ class Settings:
                "to_address" : "",
                "from_address" : "",
                "username" : "",
-               "password" : "",
+               "password" : "cGFzc3dvcmQ=", # "password"
                "media_path" : "/usr/share/laptop-alarm/media/",
                "audio_file" : "caralarm.mp3",
                "text_message" : "Laptop Alarm!!",

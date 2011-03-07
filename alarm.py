@@ -158,7 +158,8 @@ class Alarm:
                                     "alarmpic3.{0}".format(self.pics_file_extension)))
         
         sender = mailer.Mailer('smtp.gmail.com', port=587, use_tls=True)
-        sender.login(self.settings.general['username'], self.settings.general["password"])
+        sender.login(self.settings.general['username'], 
+                     b64decode(self.settings.general["password"]))
         sender.send(message)
         
     def __del__(self):

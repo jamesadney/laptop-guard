@@ -21,6 +21,7 @@ import gtk
 import dbus
 
 import os, sys
+from base64 import b64decode, b64encode
 
 import alarm
 from modules._settings import Settings
@@ -78,7 +79,7 @@ class App:
         self.to_address = new_settings.general["to_address"]
         self.from_address = new_settings.general["from_address"]
         self.username = new_settings.general["username"]
-        self.password = new_settings.general["password"]
+        self.password = b64decode(new_settings.general["password"])
         
     ## Main window callbacks ##
     
@@ -188,7 +189,7 @@ class App:
         new_settings.general['to_address'] = self.to_address
         new_settings.general['from_address'] = self.from_address
         new_settings.general['username'] = self.username
-        new_settings.general['password'] = self.password
+        new_settings.general['password'] = b64encode(self.password)
         
         new_settings.write()
         self.prefs_window.hide()

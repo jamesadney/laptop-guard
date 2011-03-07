@@ -16,6 +16,7 @@
 import subprocess
 import re
 
+#FIXME: doesn't work when music is playing (does it work when not muted in general)
 def get_system_info():
     p = subprocess.Popen(["pactl", "list"], stdout=subprocess.PIPE)
     audio_data = p.stdout
