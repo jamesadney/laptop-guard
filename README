@@ -23,6 +23,13 @@ Current Dependencies (will probably change):
 - streamer
 
 ############## Installation Instructions (Ubuntu) #############
+Do it all together:
+(1) Extract the downloaded package
+(2) Open the folder you extracted
+(3) Open ubuntu-automated-install and select the "run" option
+(4) Enter your user account password
+
+Do everything seperately:
 (1) Install dependencies:
 
 sudo apt-get install mpg123 streamer python-dbus python-gtk2 pulseaudio-utils
