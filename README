@@ -39,6 +39,12 @@ laptop-guard
 
 (2) Configure settings by clicking on button in bottom left corner of window.
 
+- If you want alerts (and the photo of your thief) to go to your phone rather
+than an email address, use the email address associated with your phone in
+the "To address:" field.
+For example: if Verizon is your phone carrier and (555)555-5555 is your number,
+use 5555555555@vzwpix.com
+
 - The username and password refer to those of your outgoing mail account (for 
 sending text message alert).The password is not securely stored (simply encoded using base64).  Soon this will be
 saved in the gnome-keyring.
