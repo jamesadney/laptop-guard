@@ -1,4 +1,4 @@
-laptop-alarm locks your screen and then waits to be triggered.
+Laptop Alarm locks your screen and then waits to be triggered.
 
 The alarm can be triggered by:
 (1) Unplugging the computer from ac power
@@ -6,7 +6,7 @@ The alarm can be triggered by:
 (3) Pressing ctrl + alt keys at the same time
 (4) Shutting the lid of the computer
 
-When triggered, laptop alarm:
+When triggered, Laptop Alarm:
 (1) Plays an alarm sound while it
     (a) Takes a picture with a webcam
     (b) Sends a picture message to a phone number of your choosing
@@ -40,12 +40,11 @@ laptop-alarm
 (2) Configure settings by clicking on button in bottom left corner of window.
 
 - The username and password refer to those of your outgoing mail account (for 
-sending text message alert)
+sending text message alert).The password is not securely stored (simply encoded using base64).  Soon this will be
+saved in the gnome-keyring.
 
 - ONLY GMAIL is supported right now because this is what I have and I wrote the
 program just for myself at first. This will be more generic in the future.
-This is not securely stored (simply encoded using base64).  Soon this will be
-saved in the gnome-keyring.
 
 - It is important to remember the "Lock Screen Password"!! The default is 
 "password"
