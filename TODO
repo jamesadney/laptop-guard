@@ -5,6 +5,8 @@
 - should i inhibit screensaver too?
     - if it locks screen in background
     
+- use python-pulseaudio to get/set volumes?
+    - if not, make this much more robust
 - mute other programs before unmuting speakers
     - if is video/music playing but you don't know it would be very annoying
       for it to turn on full blast when you set alarm
@@ -15,3 +17,18 @@
     - send any bugs to prey-modules upstream
     
 - make file paths universal
+
+- clean up code!
+
+GUI
+
+- disable callbacks for entry-activate signals in favor of saving every time close
+    is hit
+    
+- make "Show Password" work
+
+- gnome-keyring
+
+- add email server settings so gmail is required
+
+- add alarm lock screen password to preferences window - figure out user authentication

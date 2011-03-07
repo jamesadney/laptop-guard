@@ -11,27 +11,25 @@ import hashlib
 import gtk
 import pango
 import dbus
-import settings
 
 class Lock:
     def get_md5(self, string):
         return hashlib.md5(string).hexdigest()
 
-    #BUG! had three arguments
     def enter_callback(self, entry):
         
-        hashed_text = self.get_md5(entry.get_text())
+        ## old hashed password ##
+        # hashed_text = self.get_md5(entry.get_text())
         # print hashed_text
+        
+        password = entry.get_text()
 
-        if hashed_text != self.password:
+        if password != self.password:
             print " -- Bad password attempt."
             self.label.show()
             return True
         else:
             print ' -- Correctomondo. PC Unlocked.'
-            # self.label.set_markup('<span foreground="green">Very good. Access granted.</span>');
-            # self.label.show()
-#            os._exit(66)
             self.bg_window.hide()
             self.window.hide()
 
@@ -75,7 +73,7 @@ class Lock:
         if event.state & gtk.gdk.SHIFT_MASK:
             print "Shift was being held down"
 
-    def __init__(self, password):
+    def __init__(self, password, working_directory=None):
 
         # set up dbus stuff for theft-alarm
         self.session_bus = dbus.SessionBus()
@@ -134,9 +132,16 @@ class Lock:
         ###################################
         # background color and image
         ###################################
-
+        
+        if working_directory:
+            image_directory = os.path.join(working_directory, "media/")
+        else:
+            from modules._settings import Settings
+            new_settings = Settings.get_instance()
+            image_directory = new_settings.general['media_path']
+            
         image = gtk.Image()
-        bg_path = os.path.join(settings.INSTALL_DIRECTORY, "locked.png")
+        bg_path = os.path.join(image_directory, "locked.png")
         image.set_from_file(bg_path)
         image.show()
         vbox.set_size_request(main_screen_width, main_screen_height)
@@ -188,7 +193,7 @@ class Lock:
 if __name__ == "__main__":
 
     if len(sys.argv) < 2:
-        passwd = 'e75f0173be748b6f68b3feb61255693c' # preyrocks
+        passwd = 'preyrocks' # preyrocks
         # print 'No password specified.'
         # os._exit(1)
     else:

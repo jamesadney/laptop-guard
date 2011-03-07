@@ -21,17 +21,19 @@ import gobject
 import sys, os, atexit, subprocess
 from base64 import b64decode
 
-import settings
 from modules import multimedia, mailer, preylock
+
+from modules._settings import Settings
 
 class Alarm:
     """
     Receives signal to trigger alarm and activates alarm
     """
     
-    def __init__(self):
+    def __init__(self, working_directory=None):
         
         self.is_set = False
+        self.working_directory = working_directory
         
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         self.session_bus = dbus.SessionBus()
@@ -75,6 +77,11 @@ class Alarm:
         Start loop to wait for signal to activate alarm
         """ 
         if not self.is_set:
+            
+            #Get settings
+            self.settings = Settings.get_instance()
+            alarm_volume = int(self.settings.general["alarm_volume"])
+            
             # make sure service sends a signal even if it previously sent some
             self.dbus_object.Reset(dbus_interface='org.theftalarm.Alarm.Service')
             
@@ -83,10 +90,22 @@ class Alarm:
                                                         "Computer locked to let alarm trigger",
                                                         4|8)
             
-            self.alarm_sound = multimedia.Sound(settings.AUDIO_FILE, settings.VOLUME_PERCENT)
+            if self.working_directory:
+                media_directory = os.path.join(self.working_directory, "media/")
+            else:
+                media_directory = self.settings.general["media_path"]
+                
+            audio_file = self.settings.general["audio_file"]
+            audio_file_path = os.path.join(media_directory, audio_file)
+            
+            self.alarm_sound = multimedia.Sound(audio_file_path, 
+                                                alarm_volume)
             self.camera = multimedia.Webcam()
             self.is_set = True
-            self.prey_lock()
+            
+            lockscreen_password = self.settings.general["lockscreen_password"]
+            self.lock = preylock.Lock(lockscreen_password, 
+                                      self.working_directory)
     
     def unset(self):
         """
@@ -106,8 +125,11 @@ class Alarm:
         Start alarm sound and actions
         """
         if self.is_set:
-            pics_process_pid = self.camera.take_pictures(dest_directory=settings.PICTURES_PATH,
-                                      file_extension=settings.PICTURES_FILE_EXTENSION)
+            pictures_directory = self.settings.general["pictures_directory"]
+            
+            self.pics_file_extension = self.settings.general["pictures_file_extension"]
+            pics_process_pid = self.camera.take_pictures(dest_directory=pictures_directory,
+                                      file_extension=self.pics_file_extension)
             self.alarm_sound.play()
             os.waitpid(pics_process_pid, 0)
             self.__send_email()
@@ -128,34 +150,17 @@ class Alarm:
         Use mailer package to send text message
         """
         message = mailer.Message()
-        message.From = settings.FROM_EMAIL_ADDRESS
-        message.To = settings.TO_EMAIL_ADDRESS
+        message.From = self.settings.general['from_address']
+        message.To = self.settings.general['to_address']
         message.Subject = "Alarm"
-        message.Body = open(settings.TEXT_MESSAGE, "rb").read()
-        message.attach(os.path.join(settings.PICTURES_PATH ,
-                                    "alarmpic3.{0}".format(settings.PICTURES_FILE_EXTENSION)))
+        message.Body = self.settings.general['text_message']
+        message.attach(os.path.join(self.settings.general['pictures_directory'] ,
+                                    "alarmpic3.{0}".format(self.pics_file_extension)))
         
         sender = mailer.Mailer('smtp.gmail.com', port=587, use_tls=True)
-        sender.login(settings.USERNAME, b64decode(settings.PASSWORD))
+        sender.login(self.settings.general['username'], 
+                     b64decode(self.settings.general["password"]))
         sender.send(message)
-        
-    def gnome_screensaver_lock(self):
-        """
-        Lock computer using gnome-screensaver
-        """
-        #=======================================================================
-        # theftalarm = self.session_bus.get_object("org.gnome.ScreenSaver", "/")
-        # theftalarm.Lock(dbus_interface="org.gnome.ScreenSaver")
-        #=======================================================================
-        
-        subprocess.Popen(['gnome-screensaver-command', '-l'])
-        
-    def prey_lock(self):
-        
-        # changed lock to self.lock (I think the instance was getting destroyed
-        # after this method was run. why does this method exist anyway?
-        self.lock = preylock.Lock(settings.HASHED_PASSWORD)
-        print self.lock
         
     def __del__(self):
         
