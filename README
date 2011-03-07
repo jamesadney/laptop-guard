@@ -1,4 +1,4 @@
-Laptop Alarm locks your screen and then waits to be triggered.
+Laptop Guard locks your screen and sets an alarm.
 
 The alarm can be triggered by:
 (1) Unplugging the computer from ac power
@@ -6,7 +6,7 @@ The alarm can be triggered by:
 (3) Pressing ctrl + alt keys at the same time
 (4) Shutting the lid of the computer
 
-When triggered, Laptop Alarm:
+When triggered, Laptop Guard:
 (1) Plays an alarm sound while it
     (a) Takes a picture with a webcam
     (b) Sends a picture message to a phone number of your choosing
@@ -29,13 +29,13 @@ sudo apt-get install mpg123 streamer python-dbus python-gtk2 pulseaudio-utils
 
 (2) Extract tar.gz file
 (3) Move into directory and run install script as root:
-cd laptop-alarm
+cd laptop-guard
 sudo ./install.sh
     
 ############## Usage ##############
 (1) Run command:
 
-laptop-alarm
+laptop-guard
 
 (2) Configure settings by clicking on button in bottom left corner of window.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# laptop-alarm
+# Laptop Guard
 # Copyright (C) 2011 James Adney
 #
 # This program is free software: you can redistribute it and/or modify
@@ -85,7 +85,7 @@ class Alarm:
             # make sure service sends a signal even if it previously sent some
             self.dbus_object.Reset(dbus_interface='org.theftalarm.Alarm.Service')
             
-            self.cookie = self.session_manager_iface.Inhibit("Laptop Alarm",
+            self.cookie = self.session_manager_iface.Inhibit("Laptop Guard",
                                                         "0",
                                                         "Computer locked to let alarm trigger",
                                                         4|8)

@@ -5,7 +5,7 @@
   <object class="GtkWindow" id="main_window">
     <property name="width_request">300</property>
     <property name="height_request">200</property>
-    <property name="title" translatable="yes">Laptop Alarm</property>
+    <property name="title" translatable="yes">Laptop Guard</property>
     <property name="resizable">False</property>
     <signal name="destroy" handler="on_main_window_destroy"/>
     <child>
@@ -145,7 +145,7 @@
     <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="type_hint">normal</property>
-    <property name="program_name">Laptop Alarm</property>
+    <property name="program_name">Laptop Guard</property>
     <property name="version">0.6.1</property>
     <property name="copyright" translatable="yes">Copyright (c) 2011 James Adney</property>
     <property name="license" translatable="yes">This program is free software: you can redistribute it and/or modify
@@ -185,7 +185,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
   </object>
   <object class="GtkWindow" id="prefs_window">
     <property name="border_width">4</property>
-    <property name="title" translatable="yes">Laptop Alarm Settings</property>
+    <property name="title" translatable="yes">Laptop Guard Settings</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="default_width">300</property>

@@ -26,10 +26,10 @@ class Settings:
                "from_address" : "",
                "username" : "",
                "password" : "cGFzc3dvcmQ=", # "password"
-               "media_path" : "/usr/share/laptop-alarm/media/",
-               "ui_path" : "/usr/share/laptop-alarm/ui",
+               "media_path" : "/usr/share/laptop-guard/media/",
+               "ui_path" : "/usr/share/laptop-guard/ui",
                "audio_file" : "caralarm.mp3",
-               "text_message" : "Laptop Alarm!!",
+               "text_message" : "Laptop Guard!!",
                "pictures_file_extension" : "jpeg",
                "lockscreen_password" : "password"
                }
@@ -40,10 +40,10 @@ class Settings:
         
         Parameters:
             filename -- path to the settings file.
-                        If None, the default ~/.laptop-alarm/config will be used.
+                        If None, the default ~/.laptop-guard/config will be used.
         """
         if not filename:
-            self.filename = os.path.expanduser("~/.laptop-alarm/config")
+            self.filename = os.path.expanduser("~/.laptop-guard/config")
         else:
             self.filename = filename
         self.config = ConfigParser.ConfigParser()
