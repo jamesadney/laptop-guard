@@ -31,7 +31,11 @@ class App:
         
         self.ignore_battery = ignore_battery
         
-        working_directory = os.getcwd()
+        if use_local_dirs:
+            working_directory = os.getcwd()
+        else:
+            working_directory = None
+            
         self.alarm = alarm.Alarm(working_directory)
         
         ## Set up dbus ##
