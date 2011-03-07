@@ -148,6 +148,10 @@ class App:
     def on_show_password_box_toggled(self, button):
         
         self.show_password = button.get_active()
+        if self.show_password:
+            self.password_entry.set_visibility(True)
+        else:
+            self.password_entry.set_visibility(False)
         
     def on_prefs_close_btn_clicked(self, widget):
         self._close_prefs_window()
@@ -160,6 +164,10 @@ class App:
         return True
     
     def _close_prefs_window(self):
+        
+        ## Un-show password ##
+        self.password_entry.set_visibility(False)
+        self.show_password_box.set_active(False)
         
         new_settings = Settings.get_instance()
         
