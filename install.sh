@@ -8,6 +8,7 @@ cp -r ui /usr/share/laptop-alarm
 
 cp laptop-alarm /usr/bin
 
+chmod -R 755 /usr/share/laptop-alarm
 chmod +x /usr/bin/laptop-alarm /usr/share/laptop-alarm/alarm-service.py /usr/share/laptop-alarm/alarm-gtk.py
 
 mkdir /usr/share/doc/laptop-alarm
