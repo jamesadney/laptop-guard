@@ -58,6 +58,7 @@ class App:
         self.prefs_window = self.builder.get_object("prefs_window")
         self.volume_adjustment = self.builder.get_object("volume_adjustment")
         self.pictures_directory_entry = self.builder.get_object("pictures_directory_entry")
+        self.lock_pwd_entry = self.builder.get_object("lock_pwd_entry")
         self.to_address_entry = self.builder.get_object("to_address_entry")
         self.from_address_entry = self.builder.get_object("from_address_entry")
         self.username_entry = self.builder.get_object("username_entry")
@@ -73,6 +74,7 @@ class App:
         
         self.alarm_volume = int(new_settings.general["alarm_volume"])
         self.pictures_directory = new_settings.general["pictures_directory"]
+        self.lock_password = new_settings.general["lockscreen_password"]
         self.to_address = new_settings.general["to_address"]
         self.from_address = new_settings.general["from_address"]
         self.username = new_settings.general["username"]
@@ -112,6 +114,7 @@ class App:
         ## Restore settings ##
         self.volume_adjustment.set_value(self.alarm_volume)
         self.pictures_directory_entry.set_text(self.pictures_directory)
+        self.lock_pwd_entry.set_text(self.lock_password)
         self.to_address_entry.set_text(self.to_address)
         self.from_address_entry.set_text(self.from_address)
         self.username_entry.set_text(self.username)
@@ -163,6 +166,7 @@ class App:
         ## read values ##
         self.alarm_volume = int(self.volume_adjustment.get_value())
         self.pictures_directory = self.pictures_directory_entry.get_text()
+        self.lock_password = self.lock_pwd_entry.get_text()
         self.to_address = self.to_address_entry.get_text()
         self.from_address = self.from_address_entry.get_text()
         self.username = self.username_entry.get_text()
@@ -172,6 +176,7 @@ class App:
         ## Save settings ##
         new_settings.general['alarm_volume'] = self.alarm_volume
         new_settings.general['pictures_directory'] = self.pictures_directory
+        new_settings.general['lockscreen_password'] = self.lock_password
         new_settings.general['to_address'] = self.to_address
         new_settings.general['from_address'] = self.from_address
         new_settings.general['username'] = self.username
@@ -212,7 +217,7 @@ if __name__ == "__main__":
                       help="Allow user to set alarm when on battery power.\n\
                       This will make alarm go off immediately upon it being set.")
     
-    options, args = parser.parse_args()        
+    options, args = parser.parse_args()      
     
     app = App(options.ignore_battery, options.use_local_dirs)
     gtk.main()

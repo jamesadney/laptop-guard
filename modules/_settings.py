@@ -30,7 +30,7 @@ class Settings:
                "audio_file" : "caralarm.mp3",
                "text_message" : "Laptop Alarm!!",
                "pictures_file_extension" : "jpeg",
-               "lockscreen_password" : "preyrocks"
+               "lockscreen_password" : "password"
                }
     
     def __init__(self, filename = None):
