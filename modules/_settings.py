@@ -29,7 +29,7 @@ class Settings:
                "media_path" : "/usr/share/laptop-guard/media/",
                "ui_path" : "/usr/share/laptop-guard/ui",
                "audio_file" : "caralarm.mp3",
-               "text_message" : "Laptop Guard!!",
+               "text_message" : "Laptop Alarm!!",
                "pictures_file_extension" : "jpeg",
                "lockscreen_password" : "password"
                }
