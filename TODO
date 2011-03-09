@@ -20,15 +20,10 @@
 
 - clean up code!
 
-GUI
+- use gstreamer or opencv to take pictures
 
-- disable callbacks for entry-activate signals in favor of saving every time close
-    is hit
-    
-- make "Show Password" work
+GUI
 
 - gnome-keyring
 
-- add email server settings so gmail is required
-
-- add alarm lock screen password to preferences window - figure out user authentication
+- add email server settings so gmail isn't required

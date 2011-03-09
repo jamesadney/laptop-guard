@@ -20,7 +20,7 @@ Current Dependencies (will probably change):
 - python-dbus
 - python-gtk2
 - pulseaudio-utils
-- mpg123
+- python-gst0.10
 - streamer
 
 ############## Installation Instructions (Ubuntu) #############
@@ -33,7 +33,7 @@ Do it all together:
 Do everything seperately:
 (1) Install dependencies:
 
-sudo apt-get install mpg123 streamer python-dbus python-gtk2 pulseaudio-utils
+sudo apt-get install streamer python-gst0.10 python-dbus python-gtk2 pulseaudio-utils
 
 (2) Extract tar.gz file
 (3) Move into directory and run install script as root:

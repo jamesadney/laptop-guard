@@ -15,7 +15,7 @@
 
 import subprocess
 import os
-import audio
+import audio, playall
 
 class Sound:
 
@@ -35,11 +35,12 @@ class Sound:
         # unmute and set volume at desired level
         self.__unmute()
         self.__set_volume(volume_percent)
+        
+        self.player = playall.Player(file_location)
 
-    #TODO: use paplay instead? (can't loop) are .wav faster/slower to load
     def play(self):
         """
-        Simply plays an audio file using mpg123 (for prey compatibility)
+        Simply plays an audio file using gst
         """
         
         if self.playing:
@@ -47,10 +48,7 @@ class Sound:
             
         else:
             print "Playing audio file"
-            self.child_process = subprocess.Popen(["mpg123", 
-                          "--loop",
-                          "-1",      #infinite
-                          self.file_location])
+            self.player.run()
             self.playing = True
       
     def stop(self):
@@ -58,8 +56,8 @@ class Sound:
         Stop playing sound
         """
         if self.playing:
-            print "Terminating child process"
-            self.child_process.terminate()
+            print "Stopping audio playback"
+            self.player.stop()
             self.playing = False
             
         else:
