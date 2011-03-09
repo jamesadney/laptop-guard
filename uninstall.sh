@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm -rf /usr/share/laptop-guard
-rm -rf /usr/share/doc/laptop-guard
-rm -f /usr/bin/laptop-guard
+rm -rfv /usr/share/laptop-guard
+rm -rfv /usr/share/doc/laptop-guard
+rm -fv /usr/bin/laptop-guard
