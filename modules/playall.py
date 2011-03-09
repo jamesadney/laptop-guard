@@ -60,7 +60,7 @@ class Player:
 #Execution starts here
 if __name__ == "__main__":
 	
-	audio_file = "/home/james/workspace/laptop-guard/media/caralarm.mp3"
+	audio_file = "/home/james/workspace/laptop-guard/media/caralarm.ogg"
 	player = Player(audio_file)
 	player.run()
 	loop = gobject.MainLoop()
