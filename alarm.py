@@ -125,13 +125,13 @@ class Alarm:
         Start alarm sound and actions
         """
         if self.is_set:
+            
+            self.alarm_sound.play()
             pictures_directory = self.settings.general["pictures_directory"]
             
             self.pics_file_extension = self.settings.general["pictures_file_extension"]
-            pics_process_pid = self.camera.take_pictures(dest_directory=pictures_directory,
+            self.camera.take_pictures(dest_directory=pictures_directory,
                                       file_extension=self.pics_file_extension)
-            self.alarm_sound.play()
-            os.waitpid(pics_process_pid, 0)
             self.__send_email()
         else:
             print "alarm must be set for it to be activated"
