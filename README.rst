@@ -4,6 +4,9 @@ Laptop Guard
 A laptop alarm system that locks your computer and sounds 
 an alarm if triggered.
 
+*This project is at an early stage, so expect bugs.  That being said, it should
+work on most Debian/Ubuntu systems*
+
 Introduction
 ============
 
@@ -12,7 +15,7 @@ What triggers the alarm?
 
 - Unplugging the computer from ac power
 - Pressing the power button (at least on my computer)
-- Pressing ctrl + alt keys at the same time
+- Pressing ctrl & alt keys at the same time
 - Shutting the lid of the computer
 
 What happens when the alarm is triggered?
@@ -21,9 +24,6 @@ What happens when the alarm is triggered?
 - An alarm sound is played.
 - A picture is taken with the computer's webcam.
 - The picture is sent to an email or phone.
-    
-*WARNING: There are bugs in this code and it is somewhat Ubuntu/Debian and 
-Gnome dependent at the moment.*
 
 Current Dependencies (will probably change)
 -------------------------------------------
@@ -46,7 +46,7 @@ Simple
 3. Open ubuntu-automated-install and select the "run" option
 4. Enter your user account password
 
-Do everything seperately
+Do everything separately
 ------------------------
 
 1. Install dependencies::
@@ -61,23 +61,60 @@ Do everything seperately
 Usage
 =====
 
-1. Run command::
+Run this command to start the application::
+
     laptop-guard
-2. Configure settings by clicking on button in bottom left corner of window.
     
-If you want alerts (and the photo of your thief) to go to your phone rather
-than an email address, use the email address associated with your phone in
-the "To address:" field.
+You should configure the alarm settings (by clicking the button in the bottom-
+left corner of the main window) the first time you run the program.
 
-For example: if Verizon is your phone carrier and (555)555-5555 is your number,
-use 5555555555@vzwpix.com
+Configuration
+=============
 
-- The username and password refer to those of your outgoing mail account (for 
-sending text message alert).The password is not securely stored (simply encoded using base64).  Soon this will be
-saved in the gnome-keyring.
+General
+-------
 
-- ONLY GMAIL is supported right now because this is what I have and I wrote the
-program just for myself at first. This will be more generic in the future.
+======================  ========================================================
+Setting                 Description
+======================  ========================================================
+Alarm Volume            If the alarm is activated, this will be the volume of 
+                        the alarm sound.  You should leave this high except when 
+                        testing the alarm.
+Pictures Directory      On activation, the program takes pictures and stores
+                        them in this directory.  These are overwritten each time
+                        the alarm is activated.
+Lock Screen Password    This is the password you will need to give in order to
+                        unlock your computer after setting your alarm.
+======================  ========================================================
 
-- It is important to remember the "Lock Screen Password"!! The default is 
-"password"
+Text Messaging
+--------------
+
+======================  ========================================================
+Setting                 Description
+======================  ========================================================
+To Email Address        This is the email address that will receive the picture
+                        and alert which is sent when the alarm is activated.
+                        **You can ideally use your cell phone to receive 
+                        this message depending on your service provider.** For 
+                        example: if your provider is verizon you would put this 
+                        email here <your-phone-#>@vzwpix.com
+From Email Address      This is the email address that you want the message to 
+                        come from.  To be safe, use an email address that
+                        corresponds with the domain of your outgoing mail server.
+                        *Mail server configuration has not yet been implemented*
+======================  ========================================================
+
+Email Account
+-------------
+
+======================  ========================================================
+Setting                 Description
+======================  ========================================================
+Username                The username for your mail account. **Only gmail is
+                        supported as of now**
+Password                The password corresponding with your email account.
+                        *This is stored in a non-human-readable form, however it
+                        is not encrypted.  Soon it will be saved using gnome 
+                        keyring.*
+======================  ========================================================
