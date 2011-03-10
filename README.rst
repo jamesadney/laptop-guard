@@ -33,7 +33,7 @@ Current Dependencies (will probably change)
 - python-gtk2
 - pulseaudio-utils
 - python-gst0.10
-- streamer
+- python-opencv
 
 Installation Instructions (Ubuntu)
 ==================================
