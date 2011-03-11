@@ -15,7 +15,7 @@
 
 import subprocess
 import os
-import audio, playall
+import audio, playall, cv
 
 class Sound:
 
@@ -107,20 +107,27 @@ class Sound:
         
 class Webcam:
     """
-    Takes pictures with webcam using streamer
+    Takes pictures with webcam using opencv
     """
     def __init__(self):
-        pass
+        
+        #TODO: create or figure out which exception to use
+        webcam_exists = os.path.exists("/dev/video0")
+        if not webcam_exists:
+            raise Exception
+        
+        self.capture = cv.CaptureFromCAM(0)
     
     def take_pictures(self, dest_directory=None, file_extension="jpeg"):
         
         if dest_directory:
-            os.chdir(dest_directory)
+            pic_path = os.path.join(dest_directory, "alarmpic")
         
-        args = ['streamer', '-t', '4', '-r', '2', '-o', 
-                'alarmpic0.{0}'.format(file_extension)]
-        pics_process = subprocess.Popen(args)
-        return pics_process.pid
+        for i in range(4):
+            img = cv.QueryFrame(self.capture)
+            cv.SaveImage("{0}{1}.{2}".format(pic_path, i, file_extension), img)
+        
+        #TODO: release capture after saving pictures
 
     
 if __name__ == "__main__":

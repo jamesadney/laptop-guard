@@ -34,7 +34,6 @@ class Player:
 		self.player.set_state(gst.STATE_NULL)
 
 	def on_message(self, bus, message):
-		print "message received"
 		t = message.type
 		if t == gst.MESSAGE_EOS:
 			
