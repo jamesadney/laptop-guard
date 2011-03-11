@@ -11,6 +11,8 @@ cp -v laptop-guard /usr/bin
 chmod -R -v 755 /usr/share/laptop-guard
 chmod -v +x /usr/bin/laptop-guard /usr/share/laptop-guard/alarm-service.py /usr/share/laptop-guard/alarm-gtk.py
 
+cp -v org.theftalarm.Alarm.service /usr/share/dbus-1/services/
+
 mkdir -v /usr/share/doc/laptop-guard
 cp -v COPYING /usr/share/doc/laptop-guard
 cp -v TODO /usr/share/doc/laptop-guard
