@@ -100,7 +100,12 @@ class Alarm:
             
             self.alarm_sound = multimedia.Sound(audio_file_path, 
                                                 alarm_volume)
-            self.camera = multimedia.Webcam()
+            try:
+                self.camera = multimedia.Webcam()
+            except:
+                print "no camera detected"
+                self.camera = None    
+            
             self.is_set = True
             
             lockscreen_password = self.settings.general["lockscreen_password"]
@@ -130,8 +135,13 @@ class Alarm:
             pictures_directory = self.settings.general["pictures_directory"]
             
             self.pics_file_extension = self.settings.general["pictures_file_extension"]
-            self.camera.take_pictures(dest_directory=pictures_directory,
+            
+            if self.camera:
+                self.camera.take_pictures(dest_directory=pictures_directory,
                                       file_extension=self.pics_file_extension)
+            else:
+                pass
+                
             self.__send_email()
         else:
             print "alarm must be set for it to be activated"

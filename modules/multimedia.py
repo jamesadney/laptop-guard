@@ -111,6 +111,11 @@ class Webcam:
     """
     def __init__(self):
         
+        #TODO: create or figure out which exception to use
+        webcam_exists = os.path.exists("/dev/video0")
+        if not webcam_exists:
+            raise Exception
+        
         self.capture = cv.CaptureFromCAM(0)
     
     def take_pictures(self, dest_directory=None, file_extension="jpeg"):
