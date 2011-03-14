@@ -33,12 +33,12 @@ Current Dependencies (will probably change)
 - python-gtk2
 - pulseaudio-utils
 - python-gst0.10
-- python-opencv
+- python-opencv (>=2.1)
 
 Installation Instructions
 =========================
 
-Simple (Tested on Ubuntu 10.04 & 10.10)
+Simple (Tested on Ubuntu 10.10)
 ---------------------------------------
 
 1. Extract the downloaded package
