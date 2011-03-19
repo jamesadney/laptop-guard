@@ -51,7 +51,7 @@ Do everything separately (Ubuntu and probably Debian in general)
 
 1. Install dependencies::
 
-    sudo apt-get install streamer python-gst0.10 python-dbus python-gtk2 pulseaudio-utils
+    sudo apt-get install python-opencv python-gst0.10 python-dbus python-gtk2 pulseaudio-utils
 2. Extract tar.gz file
 3. Move into directory and run install script as root::
 
