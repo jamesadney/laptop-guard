@@ -20,7 +20,7 @@ pygtk.require('2.0')
 import gtk
 import dbus
 
-import os, sys
+import os
 from base64 import b64decode, b64encode
 
 from laptopguard import alarm
@@ -76,6 +76,9 @@ class App:
         self.username_entry = self.builder.get_object("username_entry")
         self.password_entry = self.builder.get_object("password_entry")
         self.show_password_box = self.builder.get_object("show_password_box")
+        self.smtp_entry = self.builder.get_object("smtp_entry")
+        self.port_entry = self.builder.get_object("port_entry")
+        self.tls_box = self.builder.get_object("tls_box")
         
         ## About Dialog ##
         self.about_dialog = self.builder.get_object("about_dialog")
@@ -91,6 +94,9 @@ class App:
         self.from_address = new_settings.general["from_address"]
         self.username = new_settings.general["username"]
         self.password = b64decode(new_settings.general["password"])
+        self.smtp_server = new_settings.general["smtp_server"]
+        self.port = new_settings.general["port"]
+        self.use_tls = bool(new_settings.general["use_tls"])
         
     ## Main window callbacks ##
     
@@ -131,6 +137,9 @@ class App:
         self.from_address_entry.set_text(self.from_address)
         self.username_entry.set_text(self.username)
         self.password_entry.set_text(self.password)
+        self.smtp_entry.set_text(self.smtp_server)
+        self.port_entry.set_text(self.port)
+        self.tls_box.set_active(self.use_tls)
         
         self.prefs_window.show_all()
         

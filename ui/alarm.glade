@@ -606,7 +606,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                           <object class="GtkEntry" id="port_entry">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="visibility">False</property>
                             <property name="invisible_char">•</property>
                           </object>
                           <packing>
