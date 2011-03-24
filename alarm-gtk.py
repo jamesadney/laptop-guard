@@ -200,6 +200,9 @@ class App:
         self.from_address = self.from_address_entry.get_text()
         self.username = self.username_entry.get_text()
         self.password = self.password_entry.get_text()
+        self.smtp_server = self.smtp_entry.get_text()
+        self.port = self.port_entry.get_text()
+        self.use_tls = self.tls_box.get_active()
         
         #TODO: only update if changed
         ## Save settings ##
@@ -210,6 +213,9 @@ class App:
         new_settings.general['from_address'] = self.from_address
         new_settings.general['username'] = self.username
         new_settings.general['password'] = b64encode(self.password)
+        new_settings.general['smtp_server'] = self.smtp_server
+        new_settings.general['port'] = self.port
+        new_settings.general['use_tls'] = self.use_tls
         
         new_settings.write()
         self.prefs_window.hide()
