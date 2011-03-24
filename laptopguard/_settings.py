@@ -31,7 +31,10 @@ class Settings:
                "audio_file" : "caralarm.ogg",
                "text_message" : "Laptop Alarm!!",
                "pictures_file_extension" : "jpeg",
-               "lockscreen_password" : "password"
+               "lockscreen_password" : "password",
+               "smtp_server" : "smtp.gmail.com",
+               "port" : 587,
+               "use_tls" : True
                }
     
     def __init__(self, filename = None):
