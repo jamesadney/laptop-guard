@@ -7,6 +7,7 @@
     
 - use python-pulseaudio to get/set volumes?
     - if not, make this much more robust
+    
 - mute other programs before unmuting speakers
     - if is video/music playing but you don't know it would be very annoying
       for it to turn on full blast when you set alarm
@@ -14,13 +15,10 @@
 - add option to run without checking battery power
     
 - rewrite gtk-lock screen
-    - send any bugs to prey-modules upstream
-    
-- make file paths universal
+
+- packaging
 
 - clean up code!
-
-- use gstreamer or opencv to take pictures
 
 GUI
 
