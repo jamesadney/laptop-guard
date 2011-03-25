@@ -158,8 +158,8 @@ class Alarm:
                                     "alarmpic3.{0}".format(self.pics_file_extension)))
         
         sender = mailer.Mailer(settings.general["smtp_server"], 
-                               int(settings.general["port"]), 
-                               bool(settings.general["use_tls"]))
+                               port=int(settings.general["port"]), 
+                               use_tls=bool(settings.general["use_tls"]))
         sender.login(self.settings.general['username'], 
                      b64decode(self.settings.general["password"]))
         sender.send(message)
