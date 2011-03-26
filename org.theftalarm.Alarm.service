@@ -1,3 +1,3 @@
 [D-BUS Service]
 Name=org.theftalarm.Alarm
-Exec=/usr/share/laptop-guard/alarm-service.py
+Exec=/usr/local/bin/alarm-service
