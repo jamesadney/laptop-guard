@@ -10,8 +10,11 @@ setup(name='Laptop Guard',
       packages=['laptopguard'],
       scripts=['alarm-service', 'laptop-guard'],
       data_files=[('laptop-guard/ui', ['ui/alarm.glade']),
-                  ('laptop-guard/media', ['media/caralarm.ogg', 'media/locked.png', 
+                  ('laptop-guard/media', ['media/caralarm.ogg', 
+                                          'media/locked.png', 
                              'media/system-lock-screen.svg']),
                   ('/usr/share/doc/laptop-guard', ['COPYING', 'README.rst', 
-                                                   'TODO'])]
+                                                   'TODO']),
+                  ('/usr/share/dbus-1/services', 
+                   ['org.theftalarm..Alarm.service'])]
      )
