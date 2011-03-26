@@ -136,7 +136,7 @@ class Lock:
         if working_directory:
             image_directory = os.path.join(working_directory, "media/")
         else:
-            from modules._settings import Settings
+            from _settings import Settings
             new_settings = Settings.get_instance()
             image_directory = new_settings.general['media_path']
             

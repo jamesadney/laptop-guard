@@ -23,8 +23,8 @@ import dbus
 import os, sys
 from base64 import b64decode, b64encode
 
-import alarm
-from modules._settings import Settings
+from laptopguard import alarm
+from laptopguard._settings import Settings
 
 class App:
     def __init__(self, ignore_battery=False, use_local_dirs=False):
