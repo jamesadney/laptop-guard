@@ -43,7 +43,7 @@ Simple (Tested on Ubuntu 10.10)
 
 1. Extract the downloaded package
 2. Open the folder you extracted
-3. Open ubuntu-automated-install and select the "run" option
+3. Open ubuntu-install and select the "run" option
 4. Enter your user account password
 
 Do everything separately (Ubuntu and probably Debian in general)
@@ -56,20 +56,7 @@ Do everything separately (Ubuntu and probably Debian in general)
 3. Move into directory and run install script as root::
 
     cd <folder-you-extracted-into>
-    sudo ./install.sh
-
-Installation on Fedora (tested with 14)
----------------------------------------
-
-1. Install dependencies::
-
-    su root
-    yum install opencv-python
-2. Extract tar.gz file
-3. Run install script (as root)::
-
-    cd <folder-you-extracted-into>
-    ./install.sh  
+    sudo python setup.py install
     
 Usage
 =====

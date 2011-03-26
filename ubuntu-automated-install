@@ -1,5 +1,0 @@
-#!/bin/bash
-
-gksudo "apt-get -y install python-opencv python-gst0.10 python-dbus python-gtk2 pulseaudio-utils"
-
-sudo python setup.py install
