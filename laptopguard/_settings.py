@@ -26,8 +26,8 @@ class Settings:
                "from_address" : "",
                "username" : "",
                "password" : "cGFzc3dvcmQ=", # "password"
-               "media_path" : "/usr/share/laptop-guard/media/",
-               "ui_path" : "/usr/share/laptop-guard/ui",
+               "media_path" : "/usr/local/laptop-guard/media/",
+               "ui_path" : "/usr/local/laptop-guard/ui",
                "audio_file" : "caralarm.ogg",
                "text_message" : "Laptop Alarm!!",
                "pictures_file_extension" : "jpeg",
