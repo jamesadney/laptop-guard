@@ -21,9 +21,9 @@ import gobject
 import sys, os, atexit, subprocess
 from base64 import b64decode
 
-from modules import multimedia, mailer, preylock
+import multimedia, mailer, preylock
 
-from modules._settings import Settings
+from _settings import Settings
 
 class Alarm:
     """
