@@ -1,0 +1,3 @@
+include COPYING README.rst TODO org.theftalarm.Alarm.service
+graft ui
+graft media
