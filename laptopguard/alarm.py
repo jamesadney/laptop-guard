@@ -167,9 +167,9 @@ class Alarm:
         message.attach(os.path.join(self.settings.general['pictures_directory'] ,
                                     "alarmpic3.{0}".format(self.pics_file_extension)))
         
-        sender = mailer.Mailer(settings.general["smtp_server"], 
-                               port=int(settings.general["port"]), 
-                               use_tls=bool(settings.general["use_tls"]))
+        sender = mailer.Mailer(self.settings.general["smtp_server"], 
+                               port=int(self.settings.general["port"]), 
+                               use_tls=bool(self.settings.general["use_tls"]))
         sender.login(self.settings.general['username'], 
                      b64decode(self.settings.general["password"]))
         sender.send(message)
