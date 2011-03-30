@@ -20,6 +20,8 @@
 
 - clean up code!
 
+- make paths distribution independent
+
 GUI
 
 - gnome-keyring
