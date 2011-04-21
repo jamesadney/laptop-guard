@@ -21,6 +21,8 @@
 
 - use gstreamer or opencv to take pictures
 
+- sound alarm any time alt is pressed (for sysrq)
+
 GUI
 
 - gnome-keyring
