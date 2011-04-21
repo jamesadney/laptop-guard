@@ -33,7 +33,7 @@ class Settings:
                "pictures_file_extension" : "jpeg",
                "lockscreen_password" : "password",
                "smtp_server" : "smtp.gmail.com",
-               "port" : 587,
+               "port" : "587",
                "use_tls" : True
                }
     
