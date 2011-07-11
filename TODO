@@ -24,6 +24,10 @@
 
 - sound alarm any time alt is pressed (for sysrq)
 
+- fix git workflow
+
+- add .desktop file
+
 GUI
 
 - gnome-keyring
