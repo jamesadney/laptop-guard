@@ -1,9 +1,5 @@
 #!/usr/bin/python
 
-<<<<<<< HEAD
-/usr/share/laptop-guard/alarm-service.py &
-/usr/share/laptop-guard/alarm-gtk.py
-=======
 # Laptop Guard
 # Copyright (C) 2011 James Adney
 #
@@ -260,4 +256,3 @@ if __name__ == "__main__":
     
     app = App(options.ignore_battery, options.use_local_dirs)
     gtk.main()
->>>>>>> 2bd34a9... added setup.py script
