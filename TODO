@@ -14,7 +14,6 @@
 - add option to run without checking battery power
     
 - rewrite gtk-lock screen
-    - send any bugs to prey-modules upstream
     
 - make file paths universal
 
