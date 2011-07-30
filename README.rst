@@ -43,7 +43,7 @@ Simple
 
 1. Extract the downloaded package
 2. Open the folder you extracted
-3. Open ubuntu-automated-install and select the "run" option
+3. Open ubuntu-install and select the "run" option
 4. Enter your user account password
 
 Do everything separately
@@ -55,8 +55,8 @@ Do everything separately
 2. Extract tar.gz file
 3. Move into directory and run install script as root::
 
-    cd laptop-guard
-    sudo ./install.sh
+    cd <folder-you-extracted-into>
+    sudo python setup.py install
     
 Usage
 =====
