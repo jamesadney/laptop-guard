@@ -19,13 +19,17 @@
 
 - clean up code!
 
-- use gstreamer or opencv to take pictures
+- use gstreamer or opencv to take pictures?
 
 - sound alarm any time alt is pressed (for sysrq)
 
 - fix git workflow
 
 - add .desktop file
+
+- don't break settings on upgrade
+
+- make a branch (develop?) the basis for specific branches like lucid?
 
 GUI
 
