@@ -73,7 +73,7 @@ class Lock:
         if event.state & gtk.gdk.SHIFT_MASK:
             print "Shift was being held down"
 
-    def __init__(self, password, working_directory=None):
+    def __init__(self, password, working_directory):
 
         # set up dbus stuff for theft-alarm
         self.session_bus = dbus.SessionBus()
@@ -133,12 +133,7 @@ class Lock:
         # background color and image
         ###################################
         
-        if working_directory:
-            image_directory = os.path.join(working_directory, "media/")
-        else:
-            from _settings import Settings
-            new_settings = Settings.get_instance()
-            image_directory = new_settings.general['media_path']
+        image_directory = os.path.join(working_directory, "laptop-guard/media/")
             
         image = gtk.Image()
         bg_path = os.path.join(image_directory, "locked.png")

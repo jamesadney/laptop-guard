@@ -27,14 +27,11 @@ from laptopguard import alarm
 from laptopguard._settings import Settings
 
 class App:
-    def __init__(self, ignore_battery=False, use_local_dirs=False):
+    def __init__(self, ignore_battery=False):
         
         self.ignore_battery = ignore_battery
         
-        if use_local_dirs:
-            working_directory = os.getcwd()
-        else:
-            working_directory = None
+        working_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             
         self.alarm = alarm.Alarm(working_directory)
         
@@ -46,10 +43,7 @@ class App:
         self.builder = gtk.Builder()
         
         new_settings = Settings.get_instance()
-        if use_local_dirs:
-            ui_directory = os.path.join(working_directory, "ui")
-        else:
-            ui_directory = new_settings.general["ui_path"]
+        ui_directory = os.path.join(working_directory, "laptop-guard/ui/")
         self.builder.add_from_file(os.path.join(ui_directory, "alarm.glade"))
         
         self.builder.connect_signals(self)
@@ -241,11 +235,6 @@ if __name__ == "__main__":
 
     parser = optparse.OptionParser(usage="%prog [options] [project-file]")
     
-    parser.add_option("-l", "--local-dirs", 
-                      action="store_true", 
-                      dest="use_local_dirs", 
-                      help="Use files from the local directory tree")
-    
     parser.add_option("--ignore-battery",
                       action="store_true",
                       dest="ignore_battery",
@@ -254,5 +243,5 @@ if __name__ == "__main__":
     
     options, args = parser.parse_args()      
     
-    app = App(options.ignore_battery, options.use_local_dirs)
+    app = App(options.ignore_battery)
     gtk.main()

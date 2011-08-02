@@ -30,7 +30,7 @@ class Alarm:
     Receives signal to trigger alarm and activates alarm
     """
     
-    def __init__(self, working_directory=None):
+    def __init__(self, working_directory):
         
         self.is_set = False
         self.working_directory = working_directory
@@ -90,10 +90,7 @@ class Alarm:
                                                         "Computer locked to let alarm trigger",
                                                         4|8)
             
-            if self.working_directory:
-                media_directory = os.path.join(self.working_directory, "media/")
-            else:
-                media_directory = self.settings.general["media_path"]
+            media_directory = os.path.join(self.working_directory, "laptop-guard/media/")
                 
             audio_file = self.settings.general["audio_file"]
             audio_file_path = os.path.join(media_directory, audio_file)

@@ -1,3 +1,3 @@
 [D-BUS Service]
 Name=org.theftalarm.Alarm
-Exec=/usr/local/bin/alarm-service
+Exec=/usr/bin/alarm-service

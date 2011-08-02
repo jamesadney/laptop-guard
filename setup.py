@@ -16,5 +16,6 @@ setup(name='Laptop Guard',
                   ('/usr/share/doc/laptop-guard', ['COPYING', 'README.rst', 
                                                    'TODO']),
                   ('/usr/share/dbus-1/services', 
-                   ['org.theftalarm.Alarm.service'])]
+                   ['org.theftalarm.Alarm.service'])],
+      requires=['gobject', 'gst', 'gtk', 'dbus'],
      )
