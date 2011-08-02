@@ -1,0 +1,16 @@
+Source: laptop-guard
+Section: python
+Priority: extra
+Maintainer: James Adney <jfadney@gmail.com>
+Build-Depends: debhelper (>= 7), python-support, python (>=2.6)
+Standards-Version: 3.8.3
+Homepage: https://github.com/jamesadney/laptop-guards
+
+Package: laptop-guard
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python-gst0.10, python-gobject, python-gtk2, python-dbus, streamer, 
+Description: alarm to prevent laptop theft
+ Laptop-Guard is an anti-theft tool which locks a compputer requiring a
+ password to unlock it.  If someone tries to unplug the laptop, press the power
+ button, or close the lid then the alarm sounds and a text message is sent to
+ the owner of the computer notifying them of the theft attempt.
