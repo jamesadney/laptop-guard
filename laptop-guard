@@ -43,7 +43,7 @@ class App:
         self.builder = gtk.Builder()
         
         new_settings = Settings.get_instance()
-        ui_directory = os.path.join(working_directory, "laptop-guard/ui/")
+        ui_directory = os.path.join(working_directory, "share/laptop-guard/ui/")
         self.builder.add_from_file(os.path.join(ui_directory, "alarm.glade"))
         
         self.builder.connect_signals(self)

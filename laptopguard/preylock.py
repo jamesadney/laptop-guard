@@ -133,7 +133,7 @@ class Lock:
         # background color and image
         ###################################
         
-        image_directory = os.path.join(working_directory, "laptop-guard/media/")
+        image_directory = os.path.join(working_directory, "share/laptop-guard/media/")
             
         image = gtk.Image()
         bg_path = os.path.join(image_directory, "locked.png")

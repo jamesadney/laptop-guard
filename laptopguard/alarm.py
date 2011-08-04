@@ -90,7 +90,7 @@ class Alarm:
                                                         "Computer locked to let alarm trigger",
                                                         4|8)
             
-            media_directory = os.path.join(self.working_directory, "laptop-guard/media/")
+            media_directory = os.path.join(self.working_directory, "share/laptop-guard/media/")
                 
             audio_file = self.settings.general["audio_file"]
             audio_file_path = os.path.join(media_directory, audio_file)
