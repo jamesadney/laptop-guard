@@ -1,0 +1,13 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Type=Application
+Terminal=false
+Icon[en_US]=gdu-encrypted-lock
+Name[en_US]=Laptop Guard
+Exec=laptop-guard
+Comment[en_US]=Laptop Anti-Theft Alarm
+Name=Laptop Guard
+Comment=Laptop Anti-Theft Alarm
+Icon=gdu-encrypted-lock
+Categories=Utility;
