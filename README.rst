@@ -38,7 +38,13 @@ Current Dependencies (will probably change)
 Installation Instructions (Ubuntu)
 ==================================
 
-Simple
+Automatic
+---------
+
+Download and install the `Ubuntu Package (in the Downloads 
+section) <https://github.com/jamesadney/laptop-guard/downloads>`_.
+
+Manual
 ------
 
 1. Extract the downloaded package
