@@ -10,7 +10,7 @@ Package: laptop-guard
 Architecture: all
 Depends: ${misc:Depends}, ${python:Depends}, python-gst0.10, python-gobject, python-gtk2, python-dbus, streamer, 
 Description: alarm to prevent laptop theft
- Laptop-Guard is an anti-theft tool which locks a compputer requiring a
+ Laptop-Guard is an anti-theft tool which locks a computer requiring a
  password to unlock it.  If someone tries to unplug the laptop, press the power
  button, or close the lid then the alarm sounds and a text message is sent to
  the owner of the computer notifying them of the theft attempt.
