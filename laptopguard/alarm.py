@@ -21,7 +21,6 @@ import gobject
 import sys
 import os
 import atexit
-import subprocess
 from base64 import b64decode
 
 import multimedia
@@ -45,10 +44,16 @@ class Alarm:
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         self.session_bus = dbus.SessionBus()
         self.dbus_object = self.session_bus.get_object("org.theftalarm.Alarm", "/")
-        self.gnome_session_manager = self.session_bus.get_object("org.gnome.SessionManager",
-                                                                 "/org/gnome/SessionManager")
-        self.session_manager_iface = dbus.Interface(self.gnome_session_manager,
-                                                    dbus_interface="org.gnome.SessionManager")
+        try:
+            gnome_session_manager = self.session_bus.get_object("org.gnome.SessionManager",
+                                                                "/org/gnome/SessionManager")
+        except dbus.exceptions.DBusException:
+            print "Gnome Session Manager was not found."
+            self.session_manager_iface = None
+
+        else:
+            self.session_manager_iface = dbus.Interface(gnome_session_manager,
+                                                        dbus_interface="org.gnome.SessionManager")
 
         # receive Unplugged signal
         self.dbus_object.connect_to_signal('TriggerAlarm',
@@ -91,10 +96,11 @@ class Alarm:
             # make sure service sends a signal even if it previously sent some
             self.dbus_object.Reset(dbus_interface='org.theftalarm.Alarm.Service')
 
-            self.cookie = self.session_manager_iface.Inhibit("Laptop Guard",
-                                                             "0",
-                                                             "Computer locked to let alarm trigger",
-                                                             4 | 8)
+            if self.session_manager_iface:
+                self.cookie = self.session_manager_iface.Inhibit("Laptop Guard",
+                                                                 "0",
+                                                                 "Computer locked to let alarm trigger",
+                                                                 4 | 8)
 
             media_directory = os.path.join(self.working_directory, "share/laptop-guard/media/")
 
@@ -120,7 +126,8 @@ class Alarm:
         except AttributeError:
             print "instances didn't need to be destroyed"
 
-        self.session_manager_iface.Uninhibit(self.cookie)
+        if self.session_manager_iface:
+            self.session_manager_iface.Uninhibit(self.cookie)
         self.is_set = False
 
     def activate(self):
