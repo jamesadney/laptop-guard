@@ -1,27 +1,30 @@
 #!/usr/bin/env python
-#############################################
+#
 # Prey Linux Lock
 # By Tomas Pollak - (c) 2010 Fork Ltd.
 # http://preyproject.com
 # GPLv3 Licence
-#############################################
+#
 
-import os, sys
+import os
+import sys
 import hashlib
 import gtk
 import pango
 import dbus
 
+
 class Lock:
+
     def get_md5(self, string):
         return hashlib.md5(string).hexdigest()
 
     def enter_callback(self, entry):
-        
-        ## old hashed password ##
+
+        # old hashed password ##
         # hashed_text = self.get_md5(entry.get_text())
         # print hashed_text
-        
+
         password = entry.get_text()
 
         if password != self.password:
@@ -49,12 +52,12 @@ class Lock:
     def on_key_press(self, widget, event):
         keyname = gtk.gdk.keyval_name(event.keyval)
 #        print "Key %s (%d) was pressed" % (keyname, event.keyval)
-        
+
         if event.keyval == 269025066:
             self.dbus_object.ManuallyTrigger(dbus_interface='org.theftalarm.Alarm.Service')
             print "Power Button Pressed, activating alarm"
-        
-        if event.keyval > 65470 and event.keyval < 65481: # F1 through F12
+
+        if event.keyval > 65470 and event.keyval < 65481:  # F1 through F12
             print "Key %s (%d) was pressed" % (keyname, event.keyval)
             # return True
         if event.state & gtk.gdk.CONTROL_MASK:
@@ -63,7 +66,7 @@ class Lock:
                 self.dbus_object.ManuallyTrigger(dbus_interface='org.theftalarm.Alarm.Service')
                 print "ctrl+alt pressed, activating alarm"
             # return True
-        #FIXME: doesn't work with right alt
+        # FIXME: doesn't work with right alt
         if event.state & gtk.gdk.MOD1_MASK:
             print "Alt was being held down"
             if event.keyval == 65507 or event.keyval == 65508:
@@ -77,19 +80,19 @@ class Lock:
 
         # set up dbus stuff for theft-alarm
         self.session_bus = dbus.SessionBus()
-        self.dbus_object  = self.session_bus.get_object("org.theftalarm.Alarm","/")
-        
+        self.dbus_object = self.session_bus.get_object("org.theftalarm.Alarm", "/")
+
         self.password = password
-        
+
         # calculate number of screens
         width = gtk.gdk.screen_width()
         height = gtk.gdk.screen_height()
 
         black = gtk.gdk.color_parse("black")
 
-        ###################################
+        #
         # black bg
-        ###################################
+        #
 
         self.bg_window = gtk.Window(gtk.WINDOW_POPUP)
         self.bg_window.modify_bg(gtk.STATE_NORMAL, black)
@@ -99,9 +102,9 @@ class Lock:
 
         monitors = self.bg_window.get_screen().get_n_monitors()
 
-        ###################################
+        #
         # window
-        ###################################
+        #
 
         self.window = gtk.Window(gtk.WINDOW_POPUP)
         self.window.set_title("Prey Lock")
@@ -129,12 +132,12 @@ class Lock:
         self.window.add(vbox)
         # vbox.show()
 
-        ###################################
+        #
         # background color and image
-        ###################################
-        
+        #
+
         image_directory = os.path.join(working_directory, "share/laptop-guard/media/")
-            
+
         image = gtk.Image()
         bg_path = os.path.join(image_directory, "locked.png")
         image.set_from_file(bg_path)
@@ -142,9 +145,9 @@ class Lock:
         vbox.set_size_request(main_screen_width, main_screen_height)
         vbox.add(image)
 
-        ###################################
+        #
         # label
-        ###################################
+        #
 
         hbox = gtk.HBox(False, 0)
         vbox.add(hbox)
@@ -156,12 +159,12 @@ class Lock:
         self.entry.set_inner_border(None)
         self.entry.set_width_chars(24)
         self.entry.set_visibility(False)
-        #self.entry.set_has_frame(False)
+        # self.entry.set_has_frame(False)
         self.entry.modify_font(pango.FontDescription("sans 20"))
         self.entry.set_flags(gtk.CAN_FOCUS | gtk.HAS_FOCUS | gtk.HAS_GRAB | gtk.CAN_DEFAULT | gtk.SENSITIVE)
-        
-        #BUG! original version had self.entry as last callback
-        #TODO: fix bug upstream
+
+        # BUG! original version had self.entry as last callback
+        # TODO: fix bug upstream
         self.entry.connect("activate", self.enter_callback)
         # self.entry.show()
 
@@ -172,7 +175,7 @@ class Lock:
 
         text = 'Invalid password. Access denied.'
         self.label = gtk.Label()
-        self.label.set_markup('<span foreground="#aa0000">'+text+'</span>');
+        self.label.set_markup('<span foreground="#aa0000">'+text+'</span>')
         self.label.modify_font(pango.FontDescription("sans 20"))
         self.label.set_size_request(main_screen_width, 30)
 
@@ -188,7 +191,7 @@ class Lock:
 if __name__ == "__main__":
 
     if len(sys.argv) < 2:
-        passwd = 'preyrocks' # preyrocks
+        passwd = 'preyrocks'  # preyrocks
         # print 'No password specified.'
         # os._exit(1)
     else:

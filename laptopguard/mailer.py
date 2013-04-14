@@ -1,4 +1,4 @@
-#coding: UTF8
+# coding: UTF8
 """
 mailer module
 
@@ -16,14 +16,14 @@ Version 0.5 is based on a patch by Douglas Mayle
 Sample code:
 
     import mailer
-    
+
     message = mailer.Message()
     message.From = "me@example.com"
     message.To = "you@example.com"
     message.Subject = "My Vacation"
     message.Body = open("letter.txt", "rb").read()
     message.attach("picture.jpg")
-    
+
     sender = mailer.Mailer('mail.example.com')
     sender.send(message)
 
@@ -62,10 +62,12 @@ __author__ = "Ryan Ginstrom"
 __license__ = "MIT"
 __description__ = "A module to send email simply in Python"
 
+
 class Mailer(object):
+
     """
     Represents an SMTP connection.
-    
+
     Use login() to log in with a username and password.
     """
 
@@ -75,7 +77,7 @@ class Mailer(object):
         self._usr = None
         self._pwd = None
         self.use_tls = use_tls
-    
+
     def login(self, usr, pwd):
         self._usr = usr
         self._pwd = pwd
@@ -95,12 +97,11 @@ class Mailer(object):
             print
             print "Error connecting to server"
             return
-            
-        
+
         # My addition #
         if self.use_tls:
             server.starttls()
-        
+
         if self._usr and self._pwd:
             server.login(self._usr, self._pwd)
 
@@ -112,7 +113,7 @@ class Mailer(object):
             self._send(server, msg)
 
         server.quit()
-    
+
     def _send(self, server, msg):
         """
         Sends a single message using the server
@@ -125,22 +126,24 @@ class Mailer(object):
             you = list(msg.To)
         server.sendmail(me, you, msg.as_string())
 
+
 class Message(object):
+
     """
     Represents an email message.
-    
+
     Set the To, From, Subject, and Body attributes as plain-text strings.
     Optionally, set the Html attribute to send an HTML email, or use the
     attach() method to attach files.
-    
+
     Use the charset property to send messages using other than us-ascii
-    
+
     If you specify an attachments argument, it should be a list of
     attachment filenames: ["file1.txt", "file2.txt"]
-    
+
     `To` should be a string for a single address, and a sequence
     of strings for multiple recipients (castable to list)
-    
+
     Send using the Mailer class.
     """
 
@@ -174,29 +177,29 @@ class Message(object):
             return self._plaintext()
         else:
             return self._multipart()
-    
+
     def _plaintext(self):
         """Plain text email with no attachments"""
 
         if not self.Html:
             msg = MIMEText(self.Body, 'plain', self.charset)
         else:
-            msg  = self._with_html()
+            msg = self._with_html()
 
         self._set_info(msg)
         return msg.as_string()
-            
+
     def _with_html(self):
         """There's an html part"""
 
         outer = MIMEMultipart('alternative')
-        
+
         part1 = MIMEText(self.Body, 'plain', self.charset)
         part2 = MIMEText(self.Html, 'html', self.charset)
 
         outer.attach(part1)
         outer.attach(part2)
-        
+
         return outer
 
     def _set_info(self, msg):
@@ -219,7 +222,7 @@ class Message(object):
 
         if self.Html:
             outer = MIMEMultipart('alternative')
-            
+
             part1 = MIMEText(self.Body, 'plain', self.charset)
             part1.add_header('Content-Disposition', 'inline')
 
@@ -276,5 +279,5 @@ class Message(object):
         Attach a file to the email. Specify the name of the file;
         Message will figure out the MIME type and load the file.
         """
-        
+
         self.attachments.append((filename, cid))
