@@ -1,0 +1,11 @@
+laptop-guard (0.6.1~ppa1) precise; urgency=low
+
+  * Work without Gnome Session Manager (fixes: Issue #12)
+
+ -- James Adney <jfadney@gmail.com>  Sun, 14 Apr 2013 14:49:22 -0500
+
+laptop-guard (0.6-0~ppa2) lucid; urgency=low
+
+  * Initial release
+
+ -- James Adney <jfadney@gmail.com>  Tue, 09 Aug 2011 16:24:56 -0700
