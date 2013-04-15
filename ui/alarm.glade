@@ -2,18 +2,68 @@
 <interface>
   <requires lib="gtk+" version="2.16"/>
   <!-- interface-naming-policy project-wide -->
+  <object class="GtkAboutDialog" id="about_dialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="modal">True</property>
+    <property name="window_position">center</property>
+    <property name="type_hint">normal</property>
+    <property name="program_name">Laptop Guard</property>
+    <property name="version">0.6.3</property>
+    <property name="copyright" translatable="yes">Copyright (c) 2011 James Adney</property>
+    <property name="license" translatable="yes">This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, version 3 of the License.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</property>
+    <property name="authors">James Adney</property>
+    <signal name="delete-event" handler="on_about_dialog_delete_event" swapped="no"/>
+    <signal name="response" handler="on_about_dialog_response" swapped="no"/>
+    <child internal-child="vbox">
+      <object class="GtkVBox" id="dialog-vbox1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkHButtonBox" id="dialog-action_area1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="main_window">
     <property name="width_request">300</property>
     <property name="height_request">200</property>
+    <property name="can_focus">False</property>
     <property name="title" translatable="yes">Laptop Guard</property>
     <property name="resizable">False</property>
-    <signal name="destroy" handler="on_main_window_destroy"/>
+    <signal name="destroy" handler="on_main_window_destroy" swapped="no"/>
     <child>
       <object class="GtkVBox" id="vbox1">
         <property name="visible">True</property>
+        <property name="can_focus">False</property>
         <child>
           <object class="GtkHButtonBox" id="hbuttonbox2">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="spacing">50</property>
             <property name="homogeneous">True</property>
             <property name="layout_style">center</property>
@@ -24,7 +74,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="on_set_btn_clicked"/>
+                <property name="use_action_appearance">False</property>
+                <signal name="clicked" handler="on_set_btn_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -39,7 +90,8 @@
                 <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
-                <signal name="clicked" handler="on_unset_btn_clicked"/>
+                <property name="use_action_appearance">False</property>
+                <signal name="clicked" handler="on_unset_btn_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -49,51 +101,38 @@
             </child>
           </object>
           <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
           <object class="GtkHSeparator" id="hseparator1">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
           </object>
           <packing>
             <property name="expand">False</property>
+            <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
         </child>
         <child>
           <object class="GtkHBox" id="hbox1">
             <property name="visible">True</property>
-            <child>
-              <object class="GtkButton" id="prefs_btn">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Preferences</property>
-                <property name="xalign">0</property>
-                <signal name="clicked" handler="on_prefs_btn_clicked"/>
-                <child>
-                  <object class="GtkImage" id="image2">
-                    <property name="visible">True</property>
-                    <property name="stock">gtk-preferences</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
+            <property name="can_focus">False</property>
             <child>
               <object class="GtkButton" id="about_btn">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">About</property>
-                <signal name="clicked" handler="on_about_btn_clicked"/>
+                <property name="use_action_appearance">False</property>
+                <signal name="clicked" handler="on_about_btn_clicked" swapped="no"/>
                 <child>
                   <object class="GtkImage" id="image1">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="stock">gtk-about</property>
                   </object>
                 </child>
@@ -105,16 +144,41 @@
               </packing>
             </child>
             <child>
+              <object class="GtkButton" id="prefs_btn">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Preferences</property>
+                <property name="use_action_appearance">False</property>
+                <property name="xalign">0</property>
+                <signal name="clicked" handler="on_prefs_btn_clicked" swapped="no"/>
+                <child>
+                  <object class="GtkImage" id="image2">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="stock">gtk-preferences</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkHButtonBox" id="close_btn_box">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <child>
                   <object class="GtkButton" id="close_btn">
                     <property name="label">gtk-quit</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_close_btn_clicked"/>
+                    <signal name="clicked" handler="on_close_btn_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -140,56 +204,8 @@
       </object>
     </child>
   </object>
-  <object class="GtkAboutDialog" id="about_dialog">
-    <property name="border_width">5</property>
-    <property name="modal">True</property>
-    <property name="window_position">center</property>
-    <property name="type_hint">normal</property>
-    <property name="program_name">Laptop Guard</property>
-    <property name="version">0.6.3</property>
-    <property name="copyright" translatable="yes">Copyright (c) 2011 James Adney</property>
-    <property name="license" translatable="yes">This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, version 3 of the License.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</property>
-    <property name="authors">James Adney</property>
-    <signal name="response" handler="on_about_dialog_response"/>
-    <signal name="delete_event" handler="on_about_dialog_delete_event"/>
-    <child internal-child="vbox">
-      <object class="GtkVBox" id="dialog-vbox1">
-        <property name="visible">True</property>
-        <property name="spacing">2</property>
-        <child>
-          <placeholder/>
-        </child>
-        <child internal-child="action_area">
-          <object class="GtkHButtonBox" id="dialog-action_area1">
-            <property name="visible">True</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkAdjustment" id="volume_adjustment">
-    <property name="upper">110</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-    <property name="page_size">10</property>
-  </object>
   <object class="GtkWindow" id="prefs_window">
+    <property name="can_focus">False</property>
     <property name="border_width">4</property>
     <property name="title" translatable="yes">Laptop Guard Settings</property>
     <property name="modal">True</property>
@@ -197,7 +213,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
     <property name="default_width">300</property>
     <property name="default_height">250</property>
     <property name="destroy_with_parent">True</property>
-    <signal name="delete_event" handler="on_prefs_window_delete_event"/>
+    <signal name="delete-event" handler="on_prefs_window_delete_event" swapped="no"/>
     <child>
       <object class="GtkNotebook" id="notebook1">
         <property name="visible">True</property>
@@ -205,14 +221,17 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
         <child>
           <object class="GtkVBox" id="vbox2">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="spacing">4</property>
             <child>
               <object class="GtkFrame" id="frame1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="label_xalign">0</property>
                 <child>
                   <object class="GtkAlignment" id="alignment1">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="top_padding">4</property>
                     <property name="bottom_padding">6</property>
                     <property name="left_padding">12</property>
@@ -220,6 +239,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                     <child>
                       <object class="GtkTable" id="table1">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="n_rows">3</property>
                         <property name="n_columns">2</property>
                         <property name="column_spacing">12</property>
@@ -227,6 +247,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <child>
                           <object class="GtkLabel" id="label4">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Alarm Volume:</property>
                           </object>
@@ -237,6 +258,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <child>
                           <object class="GtkLabel" id="label5">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Pictures Directory:</property>
                           </object>
@@ -254,7 +276,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="adjustment">volume_adjustment</property>
                             <property name="restrict_to_fill_level">False</property>
                             <property name="digits">0</property>
-                            <signal name="format_value" handler="on_hscale1_format_value"/>
+                            <signal name="format-value" handler="on_hscale1_format_value" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -266,6 +288,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">•</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -277,6 +303,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <child>
                           <object class="GtkLabel" id="label10">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Lock Screen Password:</property>
                           </object>
@@ -291,6 +318,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">•</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -306,22 +337,27 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                 <child type="label">
                   <object class="GtkLabel" id="label6">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">&lt;b&gt;General&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
                   </object>
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
               <object class="GtkFrame" id="frame2">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="label_xalign">0</property>
                 <child>
                   <object class="GtkAlignment" id="alignment2">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="top_padding">4</property>
                     <property name="bottom_padding">6</property>
                     <property name="left_padding">12</property>
@@ -329,6 +365,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                     <child>
                       <object class="GtkTable" id="table2">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="n_rows">2</property>
                         <property name="n_columns">2</property>
                         <property name="column_spacing">12</property>
@@ -338,6 +375,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">•</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -347,6 +388,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <child>
                           <object class="GtkLabel" id="label7">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">To Email Address:</property>
                           </object>
@@ -357,6 +399,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <child>
                           <object class="GtkLabel" id="label8">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">From Email Address:</property>
                             <property name="justify">right</property>
@@ -372,6 +415,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">•</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -387,18 +434,22 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                 <child type="label">
                   <object class="GtkLabel" id="label9">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">&lt;b&gt;Text Messagging&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
                   </object>
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkHButtonBox" id="hbuttonbox1">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="layout_style">end</property>
                 <child>
                   <object class="GtkButton" id="prefs_close_btn">
@@ -406,8 +457,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_prefs_close_btn_clicked"/>
+                    <signal name="clicked" handler="on_prefs_close_btn_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -427,6 +479,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
         <child type="tab">
           <object class="GtkLabel" id="label1">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">Alarm</property>
           </object>
           <packing>
@@ -436,13 +489,16 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
         <child>
           <object class="GtkVBox" id="vbox3">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <child>
               <object class="GtkFrame" id="frame3">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="label_xalign">0</property>
                 <child>
                   <object class="GtkAlignment" id="alignment3">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="top_padding">4</property>
                     <property name="bottom_padding">6</property>
                     <property name="left_padding">12</property>
@@ -450,6 +506,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                     <child>
                       <object class="GtkTable" id="table3">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="n_rows">3</property>
                         <property name="n_columns">2</property>
                         <property name="column_spacing">12</property>
@@ -457,6 +514,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <child>
                           <object class="GtkLabel" id="label11">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Username:</property>
                           </object>
@@ -467,6 +525,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <child>
                           <object class="GtkLabel" id="label12">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Password:</property>
                           </object>
@@ -482,8 +541,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="draw_indicator">True</property>
-                            <signal name="toggled" handler="on_show_password_box_toggled"/>
+                            <signal name="toggled" handler="on_show_password_box_toggled" swapped="no"/>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -497,6 +557,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">•</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -509,6 +573,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="can_focus">True</property>
                             <property name="visibility">False</property>
                             <property name="invisible_char">•</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -527,22 +595,27 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                 <child type="label">
                   <object class="GtkLabel" id="label13">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">&lt;b&gt;Email Account&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
                   </object>
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
             </child>
             <child>
               <object class="GtkFrame" id="frame4">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="label_xalign">0</property>
                 <child>
                   <object class="GtkAlignment" id="alignment4">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="top_padding">4</property>
                     <property name="bottom_padding">6</property>
                     <property name="left_padding">12</property>
@@ -550,6 +623,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                     <child>
                       <object class="GtkTable" id="table4">
                         <property name="visible">True</property>
+                        <property name="can_focus">False</property>
                         <property name="n_rows">3</property>
                         <property name="n_columns">2</property>
                         <property name="column_spacing">12</property>
@@ -557,6 +631,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <child>
                           <object class="GtkLabel" id="label3">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">SMTP Server:</property>
                           </object>
@@ -567,6 +642,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                         <child>
                           <object class="GtkLabel" id="label14">
                             <property name="visible">True</property>
+                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Port:</property>
                           </object>
@@ -582,6 +658,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
+                            <property name="use_action_appearance">False</property>
                             <property name="draw_indicator">True</property>
                           </object>
                           <packing>
@@ -596,6 +673,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">•</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -607,6 +688,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="invisible_char">•</property>
+                            <property name="primary_icon_activatable">False</property>
+                            <property name="secondary_icon_activatable">False</property>
+                            <property name="primary_icon_sensitive">True</property>
+                            <property name="secondary_icon_sensitive">True</property>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -625,18 +710,22 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                 <child type="label">
                   <object class="GtkLabel" id="label15">
                     <property name="visible">True</property>
+                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">&lt;b&gt;Mail Server&lt;/b&gt;</property>
                     <property name="use_markup">True</property>
                   </object>
                 </child>
               </object>
               <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
                 <property name="position">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkHButtonBox" id="hbuttonbox3">
                 <property name="visible">True</property>
+                <property name="can_focus">False</property>
                 <property name="layout_style">end</property>
                 <child>
                   <object class="GtkButton" id="prefs_close_btn1">
@@ -644,8 +733,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
                     <property name="use_stock">True</property>
-                    <signal name="clicked" handler="on_prefs_close_btn_clicked"/>
+                    <signal name="clicked" handler="on_prefs_close_btn_clicked" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -668,6 +758,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
         <child type="tab">
           <object class="GtkLabel" id="label2">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
             <property name="label" translatable="yes">Outgoing Email</property>
           </object>
           <packing>
@@ -677,5 +768,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</pro
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkAdjustment" id="volume_adjustment">
+    <property name="upper">110</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+    <property name="page_size">10</property>
   </object>
 </interface>
