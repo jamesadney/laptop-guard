@@ -23,6 +23,7 @@ import os
 import atexit
 from base64 import b64decode
 
+import desktops
 import multimedia
 import mailer
 import preylock
@@ -44,16 +45,9 @@ class Alarm:
         dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
         self.session_bus = dbus.SessionBus()
         self.dbus_object = self.session_bus.get_object("org.theftalarm.Alarm", "/")
-        try:
-            gnome_session_manager = self.session_bus.get_object("org.gnome.SessionManager",
-                                                                "/org/gnome/SessionManager")
-        except dbus.exceptions.DBusException:
-            print "Gnome Session Manager was not found."
-            self.session_manager_iface = None
 
-        else:
-            self.session_manager_iface = dbus.Interface(gnome_session_manager,
-                                                        dbus_interface="org.gnome.SessionManager")
+        self.session_manager_iface = None
+        self._set_session_manager_interface()
 
         # receive Unplugged signal
         self.dbus_object.connect_to_signal('TriggerAlarm',
@@ -154,6 +148,22 @@ class Alarm:
             self.alarm_sound.stop()
         except AttributeError:
             print "No alarm to deactivate"
+
+    def _set_session_manager_interface(self):
+
+        for session_manager in desktops.SESSION_MANAGERS:
+            try:
+                session_manager_obj = self.session_bus.get_object(session_manager.bus_name,
+                                                                  session_manager.object_path)
+            except dbus.exceptions.DBusException:
+                pass
+
+            else:
+                self.session_manager_iface = dbus.Interface(session_manager_obj,
+                                                            dbus_interface=session_manager.interface)
+                return
+
+        print "No session manager found."
 
     def __send_email(self):
         """
