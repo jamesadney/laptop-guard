@@ -1,3 +1,9 @@
+laptop-guard (0.6.2~ppa1) precise; urgency=low
+
+  * Add support for MATE Session Manager (fixes #15)
+
+ -- James Adney <jfadney@gmail.com>  Mon, 15 Apr 2013 01:14:43 -0500
+
 laptop-guard (0.6.1~ppa1) precise; urgency=low
 
   * Work without Gnome Session Manager (fixes: Issue #12)
