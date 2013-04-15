@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='Laptop Guard',
-      version='0.6.3',
+      version='0.6.4',
       description='A laptop alarm gtk application',
       author='James Adney',
       author_email='jfadney@gmail.com',
