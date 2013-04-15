@@ -41,8 +41,14 @@ Installation Instructions (Ubuntu)
 Automatic
 ---------
 
-Download and install the `Ubuntu Package (in the Downloads 
-section) <https://github.com/jamesadney/laptop-guard/downloads>`_.
+Use the `PPA for Laptop Guard`_::
+
+    sudo add-apt-repository ppa:jfadney/laptop-guard
+    sudo apt-get update
+    sudo apt-get install laptop-guard
+
+Or download and install the Debian package manually. You can find the most recent
+package on `the PPA's builds page`_.
 
 Manual
 ------
@@ -124,3 +130,6 @@ Password                The password corresponding with your email account.
                         is not encrypted.  Soon it will be saved using gnome 
                         keyring.*
 ======================  ========================================================
+
+.. _PPA for Laptop Guard: https://launchpad.net/~jfadney/+archive/laptop-guard
+.. _the PPA's builds page: https://launchpad.net/~jfadney/+archive/laptop-guard/+packages
